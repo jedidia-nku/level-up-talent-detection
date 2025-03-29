@@ -18,30 +18,40 @@ const Hero: React.FC = () => {
       {/* Hero Content (Fixed on top of swiper) */}
       <div className="absolute inset-0 z-10 font-newtimesRoman">
       <Header />
-      <motion.div
+      <div  className="flex flex-col justify-center items-center text-center h-screen lg:h-[450px]">
+        <motion.h1
         initial={{ opacity:0, y: -100 }}
         whileInView={{ opacity:1, y: 0 }}
         transition={{
           type: "spring",
           stiffness: 100,
           damping: 10,
-          delay: 1.2,
-        }}  className="flex flex-col justify-center items-center text-center h-[80%] lg:h-[450px]">
-        <h1
+          delay: 0.5,
+        }}
          className="text-5xl text-gray-300 font-bold leading-tight mb-4">
           Welcome to Our Awesome Website
-        </h1>
+        </motion.h1>
+        <motion.div
+        initial={{ opacity:0, y: -100 }}
+        whileInView={{ opacity:1, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 10,
+          delay: 0.4,
+        }}>
         <p
          className="text-lg text-gray-300 mb-8">
           Discover amazing features and services that await you.
         </p>
         <a
           href="#"
-          className="bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-6 rounded-full text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+          className="bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all"
         >
           Get Started
         </a>
         </motion.div>
+        </div>
       </div>
 
       {/* Swiper Background */}
@@ -62,25 +72,25 @@ const Hero: React.FC = () => {
       >
         {/* Background Images */}
         <SwiperSlide>
-          <div className="w-full h-full bg-[url('https://images.pexels.com/photos/235986/pexels-photo-235986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-center bg-cover bg-no-repeat">
+          <div className="w-full h-full bg-[url('https://img.freepik.com/photos-gratuite/public-enthousiaste-regardant-feux-artifice-confettis-s-amusant-lors-festival-musique-nuit-espace-copie_637285-559.jpg?t=st=1743271567~exp=1743275167~hmac=914eeaf7cb0252a77f31257e001f4f42b3a94271f3e13ff501e0eee32e65f8e3&w=996')] bg-center bg-cover bg-no-repeat">
             <div className="absolute inset-0 bg-black opacity-50"></div>
           </div>
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1522252234503-e356532cafd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxjb2RlfGVufDB8MHx8fDE2OTQwOTg0MTZ8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-center bg-cover bg-no-repeat">
+          <div className="w-full h-full bg-[url('https://media.istockphoto.com/id/811137890/photo/band-performance.jpg?s=1024x1024&w=is&k=20&c=ohbtg_jsi-_63aKaFwAJWn4ylLRbfUsghfWXrsCVcqc=')] bg-center bg-cover bg-no-repeat">
             <div className="absolute inset-0 bg-black opacity-50"></div>
           </div>
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="w-full h-full bg-[url('https://images.pexels.com/photos/1496372/pexels-photo-1496372.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-center bg-cover bg-no-repeat">
+          <div className="w-full h-full bg-[url('https://cdn.britannica.com/68/92668-050-1BED9B3B/Burundians-dance-Bujumbura.jpg')] bg-center bg-cover bg-no-repeat">
             <div className="absolute inset-0 bg-black opacity-50"></div>
           </div>
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="w-full h-full bg-[url('https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-center bg-cover bg-no-repeat">
+          <div className="w-full h-full bg-[url('https://media.istockphoto.com/id/520690051/photo/hands-of-the-man-playing-the-cello.jpg?s=1024x1024&w=is&k=20&c=NTPNlv5qqueP3Etax1a1KPEg6r86db_kBWEqmsIfYDc=')] bg-center bg-cover bg-no-repeat">
             <div className="absolute inset-0 bg-black opacity-50"></div>
           </div>
         </SwiperSlide>

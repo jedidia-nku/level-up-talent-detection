@@ -1,62 +1,193 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Footer from '../components/Home-Sections/Footer'
+import {motion} from "framer-motion";
 
 const NewsandGallery: React.FC = () => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div>
-        
-    <header className="top-0 bg-white shadow-md fixed w-full z-50">
-      <div className="container mx-auto flex justify-between items-center py-3 px-4">
-        {/* Logo Section */}
-        <div className="flex flex-shrink-0">
-            <a href="/" className="text-2xl font-bold">
-              LevelUp
+        <header className="top-0 bg-white shadow-md fixed w-full z-50">
+          <div className="container mx-auto flex justify-between items-center py-3 px-4">
+              {/* Logo Section */}
+                  <motion.div
+                  initial={{ opacity:0, y: -100 }}
+                  animate={{ opacity:1, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 10,
+                    delay: 0.4,
+                  }} className="flex flex-shrink-0">
+                  <a href="/" className="text-2xl font-bold text-yellow-400">
+                  LEVEL
+                </a>
+                <a href="/" className="flex items-center">
+              <img src="/assets/logo.png" className="h-10"/>
+              <a href="/" className="text-2xl font-bold text-yellow-400">
+              UP
+              </a>
             </a>
-            <a href="/" className="flex items-center">
-          <img src="/assets/logo.jpg" className="h-10"/>
-        </a>
+              </motion.div>
+                <motion.nav
+                initial={{ opacity:0, y: -100 }}
+                animate={{ opacity:1, y: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 10,
+                  delay: 0.4,
+                }} className="hidden md:flex md:space-x-6">
+                <a href="/" className="hover:text-yellow-200">
+                  Home
+                </a>
+                <a href="/about" className="hover:text-yellow-200 transition-all">
+                  About Us
+                </a>
+                <a href="/registration" className="hover:text-yellow-200 transition-all">
+                Registration
+                </a>
+                <a href="/newsAndGallery" className="text-yellow-400 hover:text-yellow-200 transition-all">
+                News and Gallery
+                </a>
+                <a href="/contact" className="hover:text-yellow-200 transition-all">
+                  Contact Us
+                </a>
+              </motion.nav>
+              {/* Mobile Menu Button */}
+              <div className="md:hidden flex items-center">
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="text-black focus:outline-none"
+                >
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
           </div>
-        <nav className="flex space-x-6">
-            <a href="/" className="hover:text-green-600">
+                  {/* Mobile Navigation Menu */}        
+              {isMobileMenuOpen && (
+              <div className="space-y-4 p-4">
+              <a href="/" className="block text-lg hover:text-yellow-200 transition-all">
               Home
-            </a>
-            <a href="/about" className="hover:text-green-600">
+              </a>
+              <a href="/about" className="block text-lg hover:text-yellow-200 transition-all">
               About Us
-            </a>
-            <a href="/registration" className="hover:text-green-600">
-            Registration
-            </a>
-            <a href="/newsAndGallery" className="hover:text-green-600">
-            News and Gallery
-            </a>
-            <a href="/contact" className="hover:text-green-600">
+              </a>
+              <a href="/registration" className="block text-lg hover:text-yellow-200 transition-all">
+              Registration
+              </a>
+              <a href="/newsAndGallery" className="block text-lg text-yellow-400 hover:text-yellow-200 transition-all">
+              News and Gallery
+              </a>
+              <a href="/contact" className="block text-lg hover:text-yellow-200 transition-all">
               Contact Us
+              </a>
+          <div className="px-16">
+            <a
+              href="/contact"
+              className="block mt-10 mb-4 mx-auto text-center bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black py-2 px-3 lg:px-4 rounded-sm text-lg transition-all"
+            >
+              Get in Touch
             </a>
-          </nav>
-      </div>
-    </header>
+          </div>
+            </div>
+            )}
+        </header>
+
     <main className="mt-16">
-    <div
+        <div
           className="relative bg-cover bg-center text-white py-36"
-          style={{ backgroundImage: "url(/assets/img/page-title-bg.webp)" }}
+          style={{ backgroundImage: "url(https://artgallery.yale.edu/sites/default/files/styles/hero_large/public/2023-01/ag-doc-2281-0036-pub.jpg?h=147a4df9&itok=ewaTyP0m)" }}
         >
         <div className="absolute inset-0 bg-black opacity-30"></div>
         <div className="relative z-10 flex flex-col justify-center items-center h-[80%] text-center">
-            <h1 className="text-4xl font-bold">News And Gallery</h1>
-            <p className='mt-2'>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
-            <p className="text-sm mt-3">Home / News And Gallery</p>
+        <motion.h1
+        initial={{ opacity:0, y: -100 }}
+        whileInView={{ opacity:1, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 10,
+          delay: 0.5,
+        }} className="text-4xl font-bold text-yellow-400">
+            News And Gallery
+        </motion.h1>
+    
+        <motion.p
+        initial={{ opacity:0, y: -100 }}
+        whileInView={{ opacity:1, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 10,
+          delay: 0.4,
+        }} className='mt-2 max-w-[70%]'>
+          Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.
+        </motion.p>
+    
+        <motion.p
+        initial={{ opacity:0, y: -100 }}
+        whileInView={{ opacity:1, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 10,
+          delay: 0.3,
+        }} className="text-sm mt-3">
+          Home / <span className="text-yellow-400">News And Gallery</span>
+        </motion.p>
           </div>
         </div>
     </main>
     
       <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16 relative">
       <div className="container mx-auto text-center mb-12">
-        <h2 className="text-3xl font-bold text-green-600">NEWS</h2>
-        <p className="text-gray-600">Providing Fresh Produce Every Single Day</p>
+            <motion.h2
+              initial={{ opacity:0, y: -100 }}
+              whileInView={{ opacity:1, y: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 0.4,
+              }} className="text-3xl font-bold text-yellow-500">NEWS
+              </motion.h2>
+      
+              <motion.p
+              initial={{ opacity:0, y: -100 }}
+              whileInView={{ opacity:1, y: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 0.4,
+              }} className="text-gray-600">Providing Fresh Produce Every Single Day
+              </motion.p>
       </div>
     <div className="grid grid-cols-1 sm:grid-cols-12 gap-5">
 
-        <div className="sm:col-span-5">
+    <motion.div
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.4,
+    }} className="sm:col-span-5">
         <a href="#">
             <div
                 className="bg-cover text-center overflow-hidden"
@@ -83,10 +214,18 @@ const NewsandGallery: React.FC = () => {
                         out of office—and reclaim their party</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
 
         <div className="sm:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5">
-            <div className="">
+                <motion.div
+                initial={{ opacity:0, y: -100 }}
+                whileInView={{ opacity:1, y: 0 }}
+                transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 0.4,
+                }}>
                 <a href="#">
                     <div className="h-40 bg-cover text-center overflow-hidden"
                         style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/07/president-trump-coronavirus-election.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
@@ -96,8 +235,16 @@ const NewsandGallery: React.FC = () => {
                 <a href="#"
                     className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">Trump
                     Steps Back Into Coronavirus Spotlight</a>
-            </div>
-            <div className="">
+            </motion.div>
+            <motion.div
+                initial={{ opacity:0, y: -100 }}
+                whileInView={{ opacity:1, y: 0 }}
+                transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 0.5,
+                }}>
                 <a href="#">
                     <div className="h-40 bg-cover text-center overflow-hidden"
                         style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/06/GettyImages-1222922545.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
@@ -107,8 +254,16 @@ const NewsandGallery: React.FC = () => {
                 <a href="#"
                     className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">How
                     Trump's Mistakes Became Biden's Big Breaks</a>
-            </div>
-            <div className="">
+            </motion.div>
+            <motion.div
+                initial={{ opacity:0, y: -100 }}
+                whileInView={{ opacity:1, y: 0 }}
+                transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 0.6,
+                }}>
                 <a href="#">
                     <div className="h-40 bg-cover text-center overflow-hidden"
                         style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/07/American-Flag.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
@@ -118,8 +273,16 @@ const NewsandGallery: React.FC = () => {
                 <a href="#"
                     className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">Survey:
                     Many Americans 'Dissatisfied' With U.S.</a>
-            </div>
-            <div className="">
+            </motion.div>
+            <motion.div
+                initial={{ opacity:0, y: -100 }}
+                whileInView={{ opacity:1, y: 0 }}
+                transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 0.4,
+                }}>
                 <a href="#">
                     <div className="h-40 bg-cover text-center overflow-hidden"
                         style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/06/GettyImages-1222922545.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
@@ -129,8 +292,16 @@ const NewsandGallery: React.FC = () => {
                 <a href="#"
                     className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">How
                     Trump's Mistakes Became Biden's Big Breaks</a>
-            </div>
-            <div className="">
+            </motion.div>
+            <motion.div
+                initial={{ opacity:0, y: -100 }}
+                whileInView={{ opacity:1, y: 0 }}
+                transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 0.5,
+                }}>
                 <a href="#">
                     <div className="h-40 bg-cover text-center overflow-hidden"
                         style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/07/American-Flag.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
@@ -140,8 +311,16 @@ const NewsandGallery: React.FC = () => {
                 <a href="#"
                     className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">Survey:
                     Many Americans 'Dissatisfied' With U.S.</a>
-            </div>
-            <div className="">
+            </motion.div>
+            <motion.div
+                initial={{ opacity:0, y: -100 }}
+                whileInView={{ opacity:1, y: 0 }}
+                transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 0.6,
+                }}>
                 <a href="#">
                     <div className="h-40 bg-cover text-center overflow-hidden"
                         style={{backgroundImage: "url('https://api.time.com/wp-content/uploads/2020/07/president-trump-coronavirus-election.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')"}}
@@ -151,42 +330,133 @@ const NewsandGallery: React.FC = () => {
                 <a href="#"
                     className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">Trump
                     Steps Back Into Coronavirus Spotlight</a>
-            </div>
+            </motion.div>
         </div>
 
     </div>
 </div>
 <div className="container mx-auto text-center mb-12">
-        <h2 className="text-3xl font-bold text-green-600">GALLERY</h2>
-        <p className="text-gray-600">Providing Fresh Produce Every Single Day</p>
+    <motion.h2
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.4,
+    }} className="text-3xl font-bold text-yellow-500">GALLERY
+    </motion.h2>
       
-<div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-12">
+    <motion.p
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.4,
+    }} className="text-gray-600">Providing Fresh Produce Every Single Day
+    </motion.p>
+      
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-12">
       <div>
-      <img className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688025668.png" alt="Gallery image" />
+    <motion.img
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.4,
+    }} className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688025668.png" alt="Gallery image" />
       </div>
       <div>
-      <img className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029344.png" alt="Gallery image" />
+    <motion.img
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.5,
+    }} className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029344.png" alt="Gallery image" />
       </div>
       <div>
-      <img className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029370.png" alt="Gallery image" />
+    <motion.img
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.6,
+    }} className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029370.png" alt="Gallery image" />
       </div>
       <div>
-      <img className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029384.png" alt="Gallery image" />
+    <motion.img
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.4,
+    }} className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029384.png" alt="Gallery image" />
       </div>
       <div>
-      <img className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029394.png" alt="Gallery image" />
+    <motion.img
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.5,
+    }} className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029394.png" alt="Gallery image" />
       </div>
       <div>
-      <img className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029408.png" alt="Gallery image" />
+    <motion.img
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.6,
+    }} className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029408.png" alt="Gallery image" />
       </div>
       <div>
-      <img className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029424.jpg" alt="Gallery image" />
+    <motion.img
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.4,
+    }} className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029424.jpg" alt="Gallery image" />
       </div>
       <div>
-      <img className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029434.png" alt="Gallery image" />
+    <motion.img
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.5,
+    }} className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029434.png" alt="Gallery image" />
       </div>
       <div>
-      <img className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029447.jpg" alt="Gallery image" />
+    <motion.img
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.6,
+    }} className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029447.jpg" alt="Gallery image" />
       </div>
       </div>
     </div>

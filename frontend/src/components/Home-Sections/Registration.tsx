@@ -15,7 +15,7 @@ const Registration: React.FC = () => {
           damping: 10,
           delay: 0.4,
         }} 
-        className="lg:w-1/2" src="https://techakim.com/sam/tg/7268/li/imgs/p-2.png" alt="port image" 
+        className="lg:w-2/3" src="https://media.istockphoto.com/id/1472359066/photo/survey-form-check-marks-on-checklist-filling-online-form-and-answering-questions-concept.jpg?s=1024x1024&w=is&k=20&c=Sffn9LQq2qK4tQm0APuanrUb0alk7DZy_KNDlduruQg=" alt="port image" 
         />
     </div>
     <motion.div
@@ -53,7 +53,7 @@ const Registration: React.FC = () => {
       </motion.p>
       <div>
         <button 
-        className="md:px-6 px-4 py-2 text-white font-semibold  outline outline-green-400 rounded-full hover:bg-green-500 transform trasition delay-300">
+        className="bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black  py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all">
           Register Now
           </button>
       </div>

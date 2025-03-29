@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Footer from "../components/Home-Sections/Footer";
-
+import {motion} from "framer-motion";
 
 const Registration: React.FC = () => {
+const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -35,52 +36,172 @@ const Registration: React.FC = () => {
 
   return (
     <>
-      <header className="top-0 bg-white shadow-md fixed w-full z-50">
-        <div className="container mx-auto flex justify-between items-center py-3 px-4">
-          {/* Logo Section */}
-          <div className="flex flex-shrink-0">
-            <a href="/" className="text-2xl font-bold">
-              LevelUp
-            </a>
-            <a href="/" className="flex items-center">
-          <img src="/assets/logo.jpg" className="h-10"/>
+  <header className="top-0 bg-white shadow-md fixed w-full z-50">
+    <div className="container mx-auto flex justify-between items-center py-3 px-4">
+        {/* Logo Section */}
+            <motion.div
+            initial={{ opacity:0, y: -100 }}
+            animate={{ opacity:1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 10,
+              delay: 0.4,
+            }} className="flex flex-shrink-0">
+            <a href="/" className="text-2xl font-bold text-yellow-400">
+            LEVEL
+          </a>
+          <a href="/" className="flex items-center">
+        <img src="/assets/logo.png" className="h-10"/>
+        <a href="/" className="text-2xl font-bold text-yellow-400">
+        UP
         </a>
-          </div>
-        <nav className="flex space-x-6">
-            <a href="/" className="hover:text-green-600">
-              Home
-            </a>
-            <a href="/about" className="hover:text-green-600">
-              About Us
-            </a>
-            <a href="/registration" className="hover:text-green-600">
-            Registration
-            </a>
-            <a href="/newsAndGallery" className="hover:text-green-600">
-            News and Gallery
-            </a>
-            <a href="/contact" className="hover:text-green-600">
-              Contact Us
-            </a>
-          </nav>
+      </a>
+        </motion.div>
+          <motion.nav
+          initial={{ opacity:0, y: -100 }}
+          animate={{ opacity:1, y: 0 }}
+          transition={{
+            type: "spring",
+            stiffness: 100,
+            damping: 10,
+            delay: 0.4,
+          }} className="hidden md:flex md:space-x-6">
+          <a href="/" className="hover:text-yellow-200">
+            Home
+          </a>
+          <a href="/about" className="hover:text-yellow-200 transition-all">
+            About Us
+          </a>
+          <a href="/registration" className="text-yellow-400 hover:text-yellow-200 transition-all">
+          Registration
+          </a>
+          <a href="/newsAndGallery" className="hover:text-yellow-200 transition-all">
+          News and Gallery
+          </a>
+          <a href="/contact" className="hover:text-yellow-200 transition-all">
+            Contact Us
+          </a>
+        </motion.nav>
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-black focus:outline-none"
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
         </div>
-      </header>
+    </div>
+            {/* Mobile Navigation Menu */}        
+        {isMobileMenuOpen && (
+        <div className="space-y-4 p-4">
+        <a href="/" className="block text-lg hover:text-yellow-200 transition-all">
+        Home
+        </a>
+        <a href="/about" className="block text-lg hover:text-yellow-200 transition-all">
+        About Us
+        </a>
+        <a href="/registration" className="block text-lg text-yellow-400 hover:text-yellow-200 transition-all">
+        Registration
+        </a>
+        <a href="/newsAndGallery" className="block text-lg hover:text-yellow-200 transition-all">
+        News and Gallery
+        </a>
+        <a href="/contact" className="block text-lg hover:text-yellow-200 transition-all">
+        Contact Us
+        </a>
+          <div className="px-16">
+            <a
+              href="/contact"
+              className="block mt-10 mb-4 mx-auto text-center bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black py-2 px-3 lg:px-4 rounded-sm text-lg transition-all"
+            >
+              Get in Touch
+            </a>
+          </div>
+      </div>
+      )}
+  </header>
 
-      <main className="mt-16">
-        <div
-          className="relative bg-cover bg-center text-white py-36"
-          style={{ backgroundImage: "url(/assets/img/page-title-bg.webp)" }}
-        >
-        <div className="absolute inset-0 bg-black opacity-30"></div>
-        <div className="relative z-10 flex flex-col justify-center items-center h-[80%] text-center">
-            <h1 className="text-4xl font-bold">Registration</h1>
-            <p className="text-sm">Home / Registration</p>
-          </div>
-        </div>
+    <main className="mt-16">
+    <div
+      className="relative bg-cover bg-center text-white py-36"
+      style={{ backgroundImage: "url(https://plus.unsplash.com/premium_photo-1664302091622-32248181a4b6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)" }}
+    >
+    <div className="absolute inset-0 bg-black opacity-30"></div>
+    <div className="relative z-10 flex flex-col justify-center items-center h-[80%] text-center">
+    <motion.h1
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.5,
+    }} className="text-4xl font-bold text-yellow-400">Registration
+    </motion.h1>
+
+    <motion.p
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.4,
+    }} className='mt-2 max-w-[70%]'>
+      At Level Up Talent Detection, we are dedicated to discovering and empowering exceptional talent across industries. 
+    </motion.p>
+
+    <motion.p
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.3,
+    }} className="text-sm mt-3">
+      Home / <span className="text-yellow-400">Registration</span>
+    </motion.p>
+      </div>
+    </div>
     <section className="bg-gray-50">
       <div className="container mx-auto text-center mt-12">
-        <h2 className="text-3xl font-bold text-green-600">REGISTRATION</h2>
-        <p className="text-gray-600">Providing Fresh Produce Every Single Day</p>
+      <motion.h2
+        initial={{ opacity:0, y: -100 }}
+        whileInView={{ opacity:1, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 10,
+          delay: 0.4,
+        }} className="text-3xl font-bold text-yellow-400">REGISTRATION
+        </motion.h2>
+
+        <motion.p
+        initial={{ opacity:0, y: -100 }}
+        whileInView={{ opacity:1, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 10,
+          delay: 0.4,
+        }} className="text-gray-600">Providing Fresh Produce Every Single Day
+        </motion.p>
       </div>
      <div className="h-[70%] shadow-lg">
        <form action="https://fabform.io/f/xxxxx" method="post" onSubmit={handleSubmit}>
@@ -88,17 +209,34 @@ const Registration: React.FC = () => {
            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
              <div className="grid lg:grid-cols-2 grid-cols-1">
                <div className="lg:mb-0 mb-10">
-                 <div className="group w-full h-[80%]">
+                 <div className="group w-full h-full">
                    <div className="relative h-full">
                    <img
-                    src="https://pagedone.io/asset/uploads/1696488602.png"
+                    src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="ContactUs tailwind section"
-                    className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply bg-indigo-700"
+                    className="w-full h-full lg:rounded-l-2xl rounded-lg bg-blend-multiply bg-indigo-700"
                   />
-                    <h1 className="text-white text-4xl font-bold leading-10 absolute top-11 left-11">
+                  <motion.h1
+                  initial={{ opacity:0, y: -100 }}
+                  whileInView={{ opacity:1, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 10,
+                    delay: 0.4,
+                  }} className="text-white text-4xl font-bold leading-10 absolute top-11 left-11">
                       Register here
-                    </h1>
-                    <div className="absolute bottom-0 w-full lg:p-11 p-5">
+                    </motion.h1>
+                    
+                    <motion.div
+                      initial={{ opacity:0, y: -100 }}
+                      whileInView={{ opacity:1, y: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 10,
+                        delay: 0.4,
+                      }} className="absolute bottom-0 w-full lg:p-11 p-5">
                             <div className="bg-white rounded-lg p-6 block">
                                 <a href="javascript:;" className="flex items-center mb-6">
                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -120,16 +258,33 @@ const Registration: React.FC = () => {
                                     <h5 className="text-black text-base font-normal leading-6 ml-5">654 Sycamore Avenue, Meadowville, WA 76543</h5>
                                 </a>
                             </div>
-                        </div>
+                        </motion.div>
                   </div>
                 </div>
               </div>
 
       <div className="flex bg-gray-100">
       <div className="bg-white py-6 px-12 rounded-lg w-full h-[80%]">
-        <h2 className="text-2xl font-bold text-center mb-4">Registration Form</h2>
+      <motion.h2
+      initial={{ opacity:0, y: -100 }}
+      whileInView={{ opacity:1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        delay: 0.4,
+      }} className="text-2xl font-bold text-center mb-4 text-yellow-400">Registration Form
+      </motion.h2>
 
-          <div className="mb-4">
+      <motion.div
+      initial={{ opacity:0, y: -100 }}
+      whileInView={{ opacity:1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        delay: 0.4,
+      }} className="mb-4">
             <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
             <div className="flex space-x-2">
               <input
@@ -157,9 +312,17 @@ const Registration: React.FC = () => {
                 placeholder="Last Name"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex space-x-4 mb-4">
+      <motion.div
+      initial={{ opacity:0, y: -100 }}
+      whileInView={{ opacity:1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        delay: 0.4,
+      }} className="flex space-x-4 mb-4">
           <div>
             <label htmlFor="age" className="block text-sm font-medium text-gray-700">Age</label>
             <input
@@ -200,8 +363,16 @@ const Registration: React.FC = () => {
               />
             </div>
             </div>
-          </div>
-          <div className="w-1/2">
+          </motion.div>
+      <motion.div
+      initial={{ opacity:0, y: -100 }}
+      whileInView={{ opacity:1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        delay: 0.4,
+      }} className="w-1/2">
             <label htmlFor="telephone" className="block text-sm font-medium text-gray-700">Telephone</label>
             <input
               type="tel"
@@ -211,8 +382,16 @@ const Registration: React.FC = () => {
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               placeholder="Telephone"
             />
-          </div>
-          <div className="flex gap-4 mb-4">
+          </motion.div>
+      <motion.div
+      initial={{ opacity:0, y: -100 }}
+      whileInView={{ opacity:1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        delay: 0.4,
+      }} className="flex gap-4 mb-4">
           <div className="w-2/3">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
             <input
@@ -235,9 +414,17 @@ const Registration: React.FC = () => {
               placeholder="Years of Experience"
             />
           </div>
-          </div>
+          </motion.div>
 
-          <div className="flex gap-4 mb-4">
+      <motion.div
+      initial={{ opacity:0, y: -100 }}
+      whileInView={{ opacity:1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        delay: 0.4,
+      }} className="flex gap-4 mb-4">
           <div className="w-1/4">
             <label htmlFor="gender" className="block text-sm font-medium text-gray-700">Gender</label>
             <select
@@ -284,8 +471,17 @@ const Registration: React.FC = () => {
               <option value="Other">Other</option>
             </select>
           </div>
-          </div>
-          <button type="submit" className="w-full p-2 mt-4 bg-blue-600 text-white rounded-md">Submit</button>
+          </motion.div>
+      <motion.button
+      initial={{ opacity:0, y: -100 }}
+      whileInView={{ opacity:1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        delay: 0.4,
+      }} type="submit" className="w-full p-2 mt-4 bg-blue-600 text-black rounded-md bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 transition-all">Submit
+      </motion.button>
 
       </div>
     </div>

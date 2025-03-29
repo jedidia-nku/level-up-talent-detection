@@ -13,7 +13,7 @@ const MissionAndObjective: React.FC = () => {
           stiffness: 100,
           damping: 10,
           delay: 0.4,
-        }} className="text-3xl font-extrabold text-gray-900">
+        }} className="md:text-3xl text-2xl font-bold text-gray-900 font-newtimesRoman text-center">
             Our Vision
             </motion.h2>
         <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -26,7 +26,7 @@ const MissionAndObjective: React.FC = () => {
           damping: 10,
           delay: 0.4,
         }}>
-        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-500 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" className="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -48,9 +48,9 @@ const MissionAndObjective: React.FC = () => {
           type: "spring",
           stiffness: 100,
           damping: 10,
-          delay: 0.4,
+          delay: 0.5,
         }}>
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-500 text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" className="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -71,9 +71,9 @@ const MissionAndObjective: React.FC = () => {
           type: "spring",
           stiffness: 100,
           damping: 10,
-          delay: 0.4,
+          delay: 0.6,
         }}>
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-500 text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" className="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
