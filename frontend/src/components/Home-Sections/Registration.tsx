@@ -27,7 +27,7 @@ const Registration: React.FC = () => {
           damping: 10,
           delay: 0.4,
         }}
-      className="lg:absolute lg:left-[30%] md:left-[30%] lg:w-[65%] lg:p-6 sm:p-6 p-4 flex flex-col justify-center bg-[#222222] font-newtimesRoman">
+      className="lg:absolute lg:left-[30%] md:left-[30%] lg:w-[65%] lg:p-6 sm:p-6 p-4 flex flex-col justify-center bg-gray-800 font-newtimesRoman">
       <motion.h2
         initial={{ opacity:0, y: -100 }}
         whileInView={{ opacity:1, y: 0 }}
@@ -52,10 +52,11 @@ const Registration: React.FC = () => {
       and win amazing prizes. Don’t wait—register now and take the first step toward your dream!
       </motion.p>
       <div>
-        <button 
+        <a
+        href="/registration"
         className="bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black  py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all">
           Register Now
-          </button>
+          </a>
       </div>
     </motion.div>
   </section>

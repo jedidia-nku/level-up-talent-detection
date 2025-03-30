@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
           delay: 0.5,
         }}
          className="text-5xl text-gray-300 font-bold leading-tight mb-4">
-          Welcome to Our Awesome Website
+          Welcome Level-up Talent Detection
         </motion.h1>
         <motion.div
         initial={{ opacity:0, y: -100 }}
@@ -42,13 +42,13 @@ const Hero: React.FC = () => {
         }}>
         <p
          className="text-lg text-gray-300 mb-8">
-          Discover amazing features and services that await you.
+          We make your talent shine like a star.
         </p>
         <a
           href="#"
           className="bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all"
         >
-          Get Started
+          Click To Register !
         </a>
         </motion.div>
         </div>
@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
 
       {/* Swiper Background */}
       <Swiper
-        spaceBetween={30}
+        spaceBetween={2}
         centeredSlides={true}
         loop={true}
         autoplay={{

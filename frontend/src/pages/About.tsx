@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Footer from '../components/Home-Sections/Footer';
 import {motion} from "framer-motion";
+import { IoCloseSharp } from 'react-icons/io5';
 
 const About: React.FC = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -101,9 +102,10 @@ const About: React.FC = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-black focus:outline-none"
+              className="text-gray-800 focus:outline-none"
             >
-              <svg
+              {isMobileMenuOpen ? 
+              (<IoCloseSharp className="h-6 w-6"/>) :(<svg
                 className="h-6 w-6"
                 fill="none"
                 stroke="currentColor"
@@ -116,7 +118,7 @@ const About: React.FC = () => {
                   strokeWidth={2}
                   d="M4 6h16M4 12h16M4 18h16"
                 ></path>
-              </svg>
+              </svg>)}
             </button>
           </div>
       </div>

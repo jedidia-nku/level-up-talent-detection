@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Footer from '../components/Home-Sections/Footer'
 import {motion} from "framer-motion";
+import { IoCloseSharp } from 'react-icons/io5';
 
 const NewsandGallery: React.FC = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -55,27 +56,29 @@ const NewsandGallery: React.FC = () => {
                 </a>
               </motion.nav>
               {/* Mobile Menu Button */}
-              <div className="md:hidden flex items-center">
-                <button
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="text-black focus:outline-none"
-                >
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6h16M4 12h16M4 18h16"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
+
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-gray-800 focus:outline-none"
+            >
+              {isMobileMenuOpen ? 
+              (<IoCloseSharp className="h-6 w-6"/>) :(<svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>)}
+            </button>
+          </div>
           </div>
                   {/* Mobile Navigation Menu */}        
               {isMobileMenuOpen && (
@@ -204,11 +207,11 @@ const NewsandGallery: React.FC = () => {
                 className="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
                 <div className="">
                     <a href="#"
-                        className="text-xs text-indigo-600 uppercase font-medium hover:text-gray-900 transition duration-500 ease-in-out">
+                        className="text-xs text-yellow-500 uppercase font-medium hover:text-gray-900 transition duration-500 ease-in-out">
                         Election
                     </a>
                     <a href="#"
-                        className="block text-gray-900 font-bold text-2xl mb-2 hover:text-indigo-600 transition duration-500 ease-in-out">Revenge
+                        className="block text-gray-900 font-bold text-2xl mb-2 hover:text-yellow-500 transition duration-500 ease-in-out">Revenge
                         of the Never Trumpers</a>
                     <p className="text-gray-700 text-base mt-2">Meet the Republican dissidents fighting to push Donald Trump
                         out of office—and reclaim their party</p>
@@ -233,7 +236,7 @@ const NewsandGallery: React.FC = () => {
                     </div>
                 </a>
                 <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">Trump
+                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Trump
                     Steps Back Into Coronavirus Spotlight</a>
             </motion.div>
             <motion.div
@@ -252,7 +255,7 @@ const NewsandGallery: React.FC = () => {
                     </div>
                 </a>
                 <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">How
+                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">How
                     Trump's Mistakes Became Biden's Big Breaks</a>
             </motion.div>
             <motion.div
@@ -271,7 +274,7 @@ const NewsandGallery: React.FC = () => {
                     </div>
                 </a>
                 <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">Survey:
+                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Survey:
                     Many Americans 'Dissatisfied' With U.S.</a>
             </motion.div>
             <motion.div
@@ -290,7 +293,7 @@ const NewsandGallery: React.FC = () => {
                     </div>
                 </a>
                 <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">How
+                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">How
                     Trump's Mistakes Became Biden's Big Breaks</a>
             </motion.div>
             <motion.div
@@ -309,7 +312,7 @@ const NewsandGallery: React.FC = () => {
                     </div>
                 </a>
                 <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">Survey:
+                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Survey:
                     Many Americans 'Dissatisfied' With U.S.</a>
             </motion.div>
             <motion.div
@@ -328,7 +331,7 @@ const NewsandGallery: React.FC = () => {
                     </div>
                 </a>
                 <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out">Trump
+                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Trump
                     Steps Back Into Coronavirus Spotlight</a>
             </motion.div>
         </div>

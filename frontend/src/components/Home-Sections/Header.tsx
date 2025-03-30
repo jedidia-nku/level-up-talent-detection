@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {motion} from "framer-motion";
+import { IoCloseSharp } from 'react-icons/io5';
 
 const Header : React.FC = () => {
 
@@ -17,9 +18,9 @@ const Header : React.FC = () => {
           damping: 10,
           delay: 0.4,
         }} 
-        className="relative text-white font-newtimesRoman">
+        className="relative text-white font-newtimesRoman bg-gray-800 md:bg-transparent">
       <div className="">
-        <div className="flex items-center justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+        <div className="flex items-center justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           {/* Logo Section */}
           <div className="flex flex-shrink-0">
             <a href="/" className="text-2xl font-bold text-yellow-400">
@@ -67,7 +68,8 @@ const Header : React.FC = () => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-white focus:outline-none"
             >
-              <svg
+              {isMobileMenuOpen ? 
+              (<IoCloseSharp className="h-6 w-6"/>) :(<svg
                 className="h-6 w-6"
                 fill="none"
                 stroke="currentColor"
@@ -80,7 +82,7 @@ const Header : React.FC = () => {
                   strokeWidth={2}
                   d="M4 6h16M4 12h16M4 18h16"
                 ></path>
-              </svg>
+              </svg>)}
             </button>
           </div>
         </div>
