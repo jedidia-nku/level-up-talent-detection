@@ -7,6 +7,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import {motion} from "framer-motion";
+import { TfiPencilAlt } from "react-icons/tfi";
+import Typewriter from "typewriter-effect"
 
 const Hero: React.FC = () => {
 
@@ -29,7 +31,11 @@ const Hero: React.FC = () => {
           delay: 0.5,
         }}
          className="text-5xl text-gray-300 font-bold leading-tight mb-4">
-          Welcome Level-up Talent Detection
+         <Typewriter options={{
+           strings: ['Welcome Level-up Talent Detection', 'If You want to develop your Talent', 'You are in the right Place'],
+           autoStart: true,
+           loop: true,
+         }} />
         </motion.h1>
         <motion.div
         initial={{ opacity:0, y: -100 }}
@@ -45,10 +51,10 @@ const Hero: React.FC = () => {
           We make your talent shine like a star.
         </p>
         <a
-          href="#"
-          className="bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all"
+          href="/registration"
+          className="w-52 flex gap-2 justify-center items-center bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all"
         >
-          Click To Register !
+          <p>Click To Register</p> <TfiPencilAlt />
         </a>
         </motion.div>
         </div>
