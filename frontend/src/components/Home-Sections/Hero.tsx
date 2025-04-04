@@ -52,7 +52,7 @@ const Hero: React.FC = () => {
         </p>
         <a
           href="/registration"
-          className="w-52 flex gap-2 justify-center items-center bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all"
+          className="w-52 mx-auto flex gap-2 justify-center items-center bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all"
         >
           <p>Click To Register</p> <TfiPencilAlt />
         </a>

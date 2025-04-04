@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const participantRoutes = require('./routes/participantRoutes');
+const contactRoutes = require("./routes/contact");
 
 // Load environment variables
 dotenv.config();
@@ -19,7 +20,8 @@ app.use(bodyParser.json());
 connectDB();
 
 // Routes
-app.use('/api/participants', participantRoutes);
+app.use('/api/register', participantRoutes);
+app.use("/api/contact", contactRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;

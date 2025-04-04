@@ -2,14 +2,40 @@ const Participant = require('../models/Participant');
 
 // Register a new participant
 const registerParticipant = async (req, res) => {
-  const { name, email, phone } = req.body;
+  const {
+    firstName,
+    middleName,
+    lastName,
+    age,
+    province,
+    district,
+    sector,
+    telephone,
+    email,
+    gender,
+    careerExperience,
+    educationLevel,
+    musicGenre,
+    registrationDate} = req.body;
 
   try {
     const newParticipant = new Participant({
-      name,
+      firstName,
+      middleName,
+      lastName,
+      age,
+      province,
+      district,
+      sector,
+      telephone,
       email,
-      phone
-    });
+      gender,
+      careerExperience,
+      educationLevel,
+      musicGenre,
+      registrationDate,
+    
+        });
 
     await newParticipant.save();
     res.status(201).json({ message: 'Participant registered successfully', participant: newParticipant });
