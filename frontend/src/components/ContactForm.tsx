@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import {motion} from "framer-motion";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ContactForm = () => {
     const [isChecked, setIsChecked] = useState(false);
@@ -23,12 +26,24 @@ const ContactForm = () => {
         });
     
         const data = await response.json();
-        alert(data.message);
-      } catch (error) {
-        console.error("Error submitting form:", error);
-      }
-    };
-
+            if (response.ok) {
+              toast.success(data.message || "Contact message sent successfully.", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "colored",
+              });
+            } else {
+              toast.error(data.message || "Something went wrong.");
+             }
+             } catch (error) {
+              console.error("Error submitting Contact message:", error);
+              toast.error("Network error or server not responding.");
+          }
+        };
   return (
     <div>
     <form onSubmit={handleSubmit}>
@@ -118,6 +133,7 @@ const ContactForm = () => {
             Send
         </motion.button>
     </form>
+    <ToastContainer />
     </div>
   )
 }

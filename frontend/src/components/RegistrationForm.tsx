@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import {motion} from "framer-motion";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegistrationForm: React.FC = () => {
     
@@ -38,14 +40,28 @@ const RegistrationForm: React.FC = () => {
             });
         
             const data = await response.json();
-            alert(data.message);
-          } catch (error) {
-            console.error("Error submitting form:", error);
+            if (response.ok) {
+              toast.success(data.message || "Registration successful!", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "colored",
+              });
+            } else {
+              toast.error(data.message || "Something went wrong.");
+             }
+             } catch (error) {
+              console.error("Error submitting form:", error);
+              toast.error("Network error or server not responding.");
           }
         };
 
   return (
-    <form action="https://fabform.io/f/xxxxx" method="post" onSubmit={handleSubmit}>
+    <>
+    <form method="post" onSubmit={handleSubmit}>
     <motion.h2
     initial={{ opacity:0, y: -100 }}
     whileInView={{ opacity:1, y: 0 }}
@@ -264,6 +280,8 @@ const RegistrationForm: React.FC = () => {
     }} type="submit" className="w-full p-2 mt-4 bg-blue-600 text-black rounded-md bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 transition-all">Submit
     </motion.button>
   </form>
+    <ToastContainer />
+    </>
   
   )
 }
