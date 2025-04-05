@@ -34,7 +34,6 @@ const registerParticipant = async (req, res) => {
       educationLevel,
       musicGenre,
       registrationDate,
-    
         });
 
     await newParticipant.save();
