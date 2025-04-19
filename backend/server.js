@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const participantRoutes = require('./routes/participantRoutes');
 const contactRoutes = require("./routes/contact");
+const uploadRoutes = require('./routes/uploadRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -22,6 +23,10 @@ connectDB();
 // Routes
 app.use('/api/register', participantRoutes);
 app.use("/api/contact", contactRoutes);
+app.use('/api/upload', uploadRoutes);
+
+// Serve uploaded images statically
+app.use('/uploads', express.static('uploads'));
 
 // Start the server
 const PORT = process.env.PORT || 5000;

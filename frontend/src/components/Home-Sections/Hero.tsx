@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
         }}
          className="text-5xl text-gray-300 font-bold leading-tight mb-4">
          <Typewriter options={{
-           strings: ['Welcome Level-up Talent Detection', 'If You want to develop your Talent', 'You are in the right Place'],
+           strings: [' Your sound matters.', 'Your story counts.', 'Your journey starts now.'],
            autoStart: true,
            loop: true,
          }} />
@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
         }}>
         <p
          className="text-lg text-gray-300 mb-8">
-          We make your talent shine like a star.
+          Where Talent Meets Opportunity.
         </p>
         <a
           href="/registration"

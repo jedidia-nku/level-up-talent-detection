@@ -36,8 +36,7 @@ const MissionAndObjective: React.FC = () => {
         </div>
         <div className="mt-5">
             <h3 className="text-lg font-medium text-gray-900">Mission</h3>
-            <p className="mt-2 text-base text-gray-500">We aim to make the world a better place through innovation
-                and collaboration.</p>
+            <p className="mt-2 text-base text-gray-500">To identify raw musical talent from diverse communities, provide them with mentorship, resources, and exposure, and create a sustainable ecosystem that empowers artists to thrive creatively and professionally.</p>
         </div>
         </motion.div>
 
@@ -60,8 +59,15 @@ const MissionAndObjective: React.FC = () => {
                 </div>
                 <div className="mt-5">
                     <h3 className="text-lg font-medium text-gray-900">Values</h3>
-                    <p className="mt-2 text-base text-gray-500">We believe in honesty, integrity, and respect for all
-                        individuals.</p>
+                    <p className="mt-2 text-base text-gray-500">
+                    <ul className="list-disc list-inside">
+                        <li><span className='font-semibold'>Creativity –</span> We champion originality and celebrate artistic expression.</li>
+                        <li><span className='font-semibold'>Inclusivity –</span> We believe talent knows no background, and everyone deserves a stage.</li>
+                        <li><span className='font-semibold'>Integrity –</span> We operate with fairness, transparency, and respect for every artist’s journey.</li>
+                        <li><span className='font-semibold'>Passion –</span> We are driven by a deep love for music and a commitment to see talent shine.</li>
+                        <li><span className='font-semibold'>Empowerment –</span> We equip artists with tools, knowledge, and opportunities to grow.</li>
+                    </ul>
+                    </p>
                 </div>
         </motion.div>
         <motion.div
@@ -84,8 +90,7 @@ const MissionAndObjective: React.FC = () => {
                 </div>
                 <div className="mt-5">
                     <h3 className="text-lg font-medium text-gray-900">Vision</h3>
-                    <p className="mt-2 text-base text-gray-500">We envision a world where technology is used to solve the
-                        most pressing issues facing humanity and improve people's lives.</p>
+                    <p className="mt-2 text-base text-gray-500">To become the leading talent detection platform in Rwanda for discovering, nurturing, and promoting hidden musical talent, transforming dreams into global success stories.</p>
                 </div>
         </motion.div>
         </div>
