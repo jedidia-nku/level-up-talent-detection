@@ -34,7 +34,7 @@ const registerParticipant = async (req, res) => {
       educationLevel,
       musicGenre,
       registrationDate,
-        });
+      });
 
     await newParticipant.save();
     res.status(201).json({ message: 'Participant registered successfully', participant: newParticipant });

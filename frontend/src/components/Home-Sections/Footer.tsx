@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
 
     <footer className="w-full md:bottom-0 bg-gray-800 text-white">
         <div className="w-full mx-aut md:px-10 px-4 pb-10">
-            <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 justify-items-start pt-12">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 justify-items-start pt-12">
                 <div className="mt-4">
                         <motion.h1
                           initial={{ opacity:0, y: -100 }}
@@ -181,7 +181,7 @@ const Footer: React.FC = () => {
                     }} className="flex items-center mt-2 hover:text-yellow-400 transition-all"><b><IoChevronForwardOutline /></b><a href="#">Terms & Conditions</a></motion.li>
                     </ul>
                 </div>
-                <div className="mt-4">
+                {/* <div className="mt-4">
                     <h2 className="text-xl font-display mb-8 text-yellow-400">Photo Gallery</h2>
                     <div className="w-full grid grid-cols-3 place-items-center justify-items-stretch gap-4 mt-6">
                     <motion.img
@@ -239,7 +239,7 @@ const Footer: React.FC = () => {
                         delay: 0.5,
                     }} className="rounded-md outline outline-[4px] outline-yellow-400" src="https://images.unsplash.com/photo-1712002641088-9d76f9080889?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxhaSUyMHJlbGF0ZWR8ZW58MHwwfHx8MTczMTUwNzg2NXww&ixlib=rb-4.0.3&q=80&w=1080" alt="Gallery Image" />
                     </div>
-                </div>
+                </div> */}
                 <div className="w-full mt-4 lg:pl-6">
                     <motion.h4
                     initial={{ opacity:0, y: -100 }}

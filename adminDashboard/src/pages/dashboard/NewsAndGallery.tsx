@@ -5,11 +5,96 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+interface NewsItem {
+  _id?: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+}
+
 const NewsandGallery: React.FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [images, setImages] = useState<{ filename: string; url: string }[]>([]);
+  const [news, setNews] = useState<{
+    title: string;
+    description: string;
+    image: File | null;
+  }>({
+    title: "",
+    description: "",
+    image: null,
+  });
+  const [newsList, setNewsList] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setNews({ ...news, [name]: value });
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setNews({ ...news, image: file });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+  
+    const formData = new FormData();
+    formData.append("title", news.title);
+    formData.append("description", news.description);
+    if (news.image) {
+      formData.append("image", news.image);
+    }
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/news", {
+        method: "POST",
+        body: formData,
+      });
+  
+      const result = await response.json();
+
+      toast.success(result.message || "Image uploaded successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+  
+      // Reset form and close modal
+      setNews({ title: "", description: "", image: null });
+      setIsNewsModalOpen(false);
+    } catch (error: any) {
+      console.error("Upload failed:", error);
+      toast.error(error?.response?.data?.message || "Network error or server not responding.");
+    }
+  };
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        setLoading(true); // start loading
+        const res = await axios.get("http://localhost:5000/api/news");
+        setNewsList(res.data || []);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+        setError("Failed to fetch news. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+
+  }, []);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -60,12 +145,14 @@ const NewsandGallery: React.FC = () => {
 
 return (
 <div>
+{loading && <p>Loading...</p>}
+{error && <p>{error}</p>}
 <div className="max-w-screen-xl mx-auto p-5 relative">
   <div className="w-full flex justify-end">
   <div>
       <div className="relative">
       <button
-      onClick={() => setIsOpen(true)}
+      onClick={() => setIsNewsModalOpen(true)}
        className="bg-gray-700 text-white px-4 py-2 flex gap-2 items-center rounded-sm shadow-sm whitespace-nowrap">
         Add News
       </button>
@@ -133,8 +220,11 @@ return (
             </div>
         </motion.div>
 
+        {!loading && !error && (
         <div className="sm:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5">
+        {newsList.map((item) => ( 
                 <motion.div
+                key={item._id}
                 initial={{ opacity:0, y: -100 }}
                 whileInView={{ opacity:1, y: 0 }}
                 transition={{
@@ -145,110 +235,16 @@ return (
                 }}>
                 <a href="#">
                     <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/07/president-trump-coronavirus-election.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
+                        style={{backgroundImage: `url('http://localhost:5000${item.imageUrl}')`}}
                         title="Woman holding a mug">
                     </div>
                 </a>
                 <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Trump
-                    Steps Back Into Coronavirus Spotlight</a>
+                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">{item.title}</a>
             </motion.div>
-            <motion.div
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.5,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/06/GettyImages-1222922545.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">How
-                    Trump's Mistakes Became Biden's Big Breaks</a>
-            </motion.div>
-            <motion.div
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.6,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/07/American-Flag.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Survey:
-                    Many Americans 'Dissatisfied' With U.S.</a>
-            </motion.div>
-            <motion.div
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.4,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/06/GettyImages-1222922545.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">How
-                    Trump's Mistakes Became Biden's Big Breaks</a>
-            </motion.div>
-            <motion.div
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.5,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/07/American-Flag.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Survey:
-                    Many Americans 'Dissatisfied' With U.S.</a>
-            </motion.div>
-            <motion.div
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.6,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: "url('https://api.time.com/wp-content/uploads/2020/07/president-trump-coronavirus-election.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')"}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Trump
-                    Steps Back Into Coronavirus Spotlight</a>
-            </motion.div>
+            ))}
         </div>
+        )}
 
 </div>
 </div>
@@ -328,6 +324,61 @@ return (
           Upload
         </button>
       </div>
+    </div>
+  </div>
+)}
+{isNewsModalOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div className="bg-white rounded-md p-6 w-full max-w-md shadow-lg">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold">Add News</h2>
+        <button onClick={() => setIsNewsModalOpen(false)} className="text-gray-500 hover:text-red-500 text-xl">
+          &times;
+        </button>
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Title */}
+        <div>
+          <label className="block text-sm font-medium">Title</label>
+          <input
+            type="text"
+            name="title"
+            value={news.title}
+            onChange={handleInputChange}
+            className="w-full border rounded px-3 py-2 focus:outline-none"
+            required
+          />
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="block text-sm font-medium">Description</label>
+          <textarea
+            name="description"
+            value={news.description}
+            onChange={handleInputChange}
+            className="w-full border rounded px-3 py-2 focus:outline-none"
+            rows={3}
+            required
+          />
+        </div>
+
+        {/* Image */}
+        <div>
+          <label className="block text-sm font-medium">Image</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="w-full"
+            required
+          />
+        </div>
+
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          Submit
+        </button>
+      </form>
     </div>
   </div>
 )}

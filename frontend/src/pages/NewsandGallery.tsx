@@ -1,10 +1,54 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../components/Home-Sections/Footer'
 import {motion} from "framer-motion";
 import { IoCloseSharp } from 'react-icons/io5';
+import axios from "axios";
+
+interface NewsItem {
+  _id?: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+}
 
 const NewsandGallery: React.FC = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+      const [images, setImages] = useState<{ filename: string; url: string }[]>([]);
+      const [newsList, setNewsList] = useState<NewsItem[]>([]);
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState<string | null>(null);
+
+      useEffect(() => {
+        const fetchNews = async () => {
+          try {
+            setLoading(true); // start loading
+            const res = await axios.get("http://localhost:5000/api/news");
+            setNewsList(res.data || []);
+          } catch (error) {
+            console.error("Error fetching news:", error);
+            setError("Failed to fetch news. Please try again later.");
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchNews();
+    
+      }, []);
+    
+      useEffect(() => {
+        const fetchImages = async () => {
+          try {
+            const res = await axios.get("http://localhost:5000/api/upload");
+            setImages(res.data);
+          } catch (err) {
+            console.error("Failed to fetch images", err);
+          }
+        };
+    
+        fetchImages();
+      }, []);
 
   return (
     <div>
@@ -219,8 +263,11 @@ const NewsandGallery: React.FC = () => {
             </div>
         </motion.div>
 
+        {!loading && !error && (
         <div className="sm:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5">
+        {newsList.map((item) => ( 
                 <motion.div
+                key={item._id}
                 initial={{ opacity:0, y: -100 }}
                 whileInView={{ opacity:1, y: 0 }}
                 transition={{
@@ -231,110 +278,16 @@ const NewsandGallery: React.FC = () => {
                 }}>
                 <a href="#">
                     <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/07/president-trump-coronavirus-election.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
+                        style={{backgroundImage: `url('http://localhost:5000${item.imageUrl}')`}}
                         title="Woman holding a mug">
                     </div>
                 </a>
                 <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Trump
-                    Steps Back Into Coronavirus Spotlight</a>
+                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">{item.title}</a>
             </motion.div>
-            <motion.div
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.5,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/06/GettyImages-1222922545.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">How
-                    Trump's Mistakes Became Biden's Big Breaks</a>
-            </motion.div>
-            <motion.div
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.6,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/07/American-Flag.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Survey:
-                    Many Americans 'Dissatisfied' With U.S.</a>
-            </motion.div>
-            <motion.div
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.4,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/06/GettyImages-1222922545.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">How
-                    Trump's Mistakes Became Biden's Big Breaks</a>
-            </motion.div>
-            <motion.div
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.5,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://api.time.com/wp-content/uploads/2020/07/American-Flag.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')`}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Survey:
-                    Many Americans 'Dissatisfied' With U.S.</a>
-            </motion.div>
-            <motion.div
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.6,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: "url('https://api.time.com/wp-content/uploads/2020/07/president-trump-coronavirus-election.jpg?quality=85&amp;w=364&amp;h=204&amp;crop=1')"}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">Trump
-                    Steps Back Into Coronavirus Spotlight</a>
-            </motion.div>
+            ))}
         </div>
+        )}
 
     </div>
 </div>
@@ -361,7 +314,7 @@ const NewsandGallery: React.FC = () => {
     }} className="text-gray-600">Providing Fresh Produce Every Single Day
     </motion.p>
       
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-12">
+    {/* <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-12">
       <div>
     <motion.img
     initial={{ opacity:0, y: -100 }}
@@ -461,6 +414,19 @@ const NewsandGallery: React.FC = () => {
       delay: 0.6,
     }} className="h-auto max-w-full rounded-lg" src="https://pagedone.io/asset/uploads/1688029447.jpg" alt="Gallery image" />
       </div>
+      </div> */}
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-12">
+    {images.map((img) => (<div key={img.filename}>
+    <motion.img
+    initial={{ opacity:0, y: -100 }}
+    whileInView={{ opacity:1, y: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      delay: 0.4,
+    }}className="h-auto max-w-full rounded-lg" src={img.url} alt={img.filename} />
+      </div>))}
       </div>
     </div>
     <Footer />
