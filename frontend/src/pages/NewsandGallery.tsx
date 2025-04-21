@@ -23,7 +23,7 @@ const NewsandGallery: React.FC = () => {
         const fetchNews = async () => {
           try {
             setLoading(true); // start loading
-            const res = await axios.get("http://localhost:5000/api/news");
+            const res = await axios.get("https://level-up-talent-detection.onrender.com/api/news");
             setNewsList(res.data || []);
           } catch (error) {
             console.error("Error fetching news:", error);
@@ -40,7 +40,7 @@ const NewsandGallery: React.FC = () => {
       useEffect(() => {
         const fetchImages = async () => {
           try {
-            const res = await axios.get("http://localhost:5000/api/upload");
+            const res = await axios.get("https://level-up-talent-detection.onrender.com/api/upload");
             setImages(res.data);
           } catch (err) {
             console.error("Failed to fetch images", err);
@@ -278,7 +278,7 @@ const NewsandGallery: React.FC = () => {
                 }}>
                 <a href="#">
                     <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('http://localhost:5000${item.imageUrl}')`}}
+                        style={{backgroundImage: `url('https://level-up-talent-detection.onrender.com${item.imageUrl}')`}}
                         title="Woman holding a mug">
                     </div>
                 </a>
