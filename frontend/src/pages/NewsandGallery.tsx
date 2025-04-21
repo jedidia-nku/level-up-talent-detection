@@ -22,7 +22,7 @@ const NewsandGallery: React.FC = () => {
       useEffect(() => {
         const fetchNews = async () => {
           try {
-            setLoading(true); // start loading
+            setLoading(true);
             const res = await axios.get("https://level-up-talent-detection.onrender.com/api/news");
             setNewsList(res.data || []);
           } catch (error) {
@@ -263,31 +263,31 @@ const NewsandGallery: React.FC = () => {
             </div>
         </motion.div>
 
-        {!loading && !error && (
-        <div className="sm:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5">
-        {newsList.map((item) => ( 
-                <motion.div
-                key={item._id}
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.4,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://level-up-talent-detection.onrender.com${item.imageUrl}')`}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">{item.title}</a>
-            </motion.div>
-            ))}
-        </div>
-        )}
+    {!loading && !error && (
+    <div className="sm:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5">
+    {newsList.map((item) => ( 
+            <motion.div
+            key={item._id}
+            initial={{ opacity:0, y: -100 }}
+            whileInView={{ opacity:1, y: 0 }}
+            transition={{
+            type: "spring",
+            stiffness: 100,
+            damping: 10,
+            delay: 0.4,
+            }}>
+            <a href="#">
+                <div className="h-40 bg-cover text-center overflow-hidden"
+                    style={{backgroundImage: `url('https://level-up-talent-detection.onrender.com${item.imageUrl}')`}}
+                    title="Woman holding a mug">
+                </div>
+            </a>
+            <a href="#"
+                className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">{item.title}</a>
+        </motion.div>
+        ))}
+    </div>
+    )}
 
     </div>
 </div>

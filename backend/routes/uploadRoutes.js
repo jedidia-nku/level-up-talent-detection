@@ -42,7 +42,7 @@ router.get("/", (req, res) => {
 
     const fileUrls = files.map(file => ({
       filename: file,
-      url: `http://localhost:5000/uploads/${file}`,
+      url: `https://level-up-talent-detection.onrender.com/uploads/${file}`,
     }));
 
     res.status(200).json(fileUrls);

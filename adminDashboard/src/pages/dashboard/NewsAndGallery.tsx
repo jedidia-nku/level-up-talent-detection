@@ -52,7 +52,7 @@ const NewsandGallery: React.FC = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:5000/api/news", {
+      const response = await fetch("https://level-up-talent-detection.onrender.com/api/news", {
         method: "POST",
         body: formData,
       });
@@ -82,7 +82,7 @@ const NewsandGallery: React.FC = () => {
     const fetchNews = async () => {
       try {
         setLoading(true); // start loading
-        const res = await axios.get("http://localhost:5000/api/news");
+        const res = await axios.get("https://level-up-talent-detection.onrender.com/api/news");
         setNewsList(res.data || []);
       } catch (error) {
         console.error("Error fetching news:", error);
@@ -99,7 +99,7 @@ const NewsandGallery: React.FC = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/upload");
+        const res = await axios.get("https://level-up-talent-detection.onrender.com/api/upload");
         setImages(res.data);
       } catch (err) {
         console.error("Failed to fetch images", err);
@@ -116,7 +116,7 @@ const NewsandGallery: React.FC = () => {
     formData.append("photo", file);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/upload", formData, {
+      const response = await axios.post("https://level-up-talent-detection.onrender.com/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -235,7 +235,7 @@ return (
                 }}>
                 <a href="#">
                     <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('http://localhost:5000${item.imageUrl}')`}}
+                        style={{backgroundImage: `url('https://level-up-talent-detection.onrender.com${item.imageUrl}')`}}
                         title="Woman holding a mug">
                     </div>
                 </a>
