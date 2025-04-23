@@ -3,7 +3,7 @@ import {motion} from "framer-motion";
 
 const MissionAndObjective: React.FC = () => {
   return (
-    <section className="bg-gray-100 py-16">
+    <section className="bg-gray-100 pb-16">
     <div className="max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8 font-newtimesRoman">
     <motion.h2
         initial={{ opacity:0, y: -100 }}

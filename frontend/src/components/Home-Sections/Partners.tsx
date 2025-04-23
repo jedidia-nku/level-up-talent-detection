@@ -4,7 +4,7 @@ import {motion} from "framer-motion";
 
 const Partners: React.FC = () => {
 	return (
-		<section className="bg-background py-8">
+		<section className="bg-background pt-8">
 	<motion.h2
       initial={{ opacity:0, y: -100 }}
       whileInView={{ opacity:1, y: 0 }}

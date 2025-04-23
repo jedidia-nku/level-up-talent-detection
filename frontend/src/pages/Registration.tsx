@@ -191,7 +191,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
                     alt="ContactUs tailwind section"
                     className="w-full h-full lg:rounded-l-2xl rounded-lg bg-blend-multiply bg-indigo-700"
                   />
-                  <motion.h1
+                  {/* <motion.h1
                   initial={{ opacity:0, y: -100 }}
                   whileInView={{ opacity:1, y: 0 }}
                   transition={{
@@ -233,7 +233,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
                                     <h5 className="text-black text-base font-normal leading-6 ml-5">654 Sycamore Avenue, Meadowville, WA 76543</h5>
                                 </a>
                             </div>
-                        </motion.div>
+                        </motion.div> */}
                   </div>
                 </div>
               </div>
