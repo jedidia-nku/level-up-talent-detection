@@ -101,7 +101,7 @@ const ParticipantsTable: React.FC = () => {
               <td className="p-3 text-sm hidden sm:table-cell">{row.levelOfEducation}</td>
               <td className="p-3 text-sm hidden sm:table-cell">{row.musicGenre}</td>
               <td className="p-3 text-sm hidden sm:table-cell">{row.amount}</td>
-              <td className="p-3 text-sm hidden sm:table-cell">{row.method}</td>
+              <td className="p-3 text-sm hidden sm:table-cell whitespace-nowrap">{row.method}</td>
               <td className="p-3 text-sm hidden sm:table-cell">
                 <span className={`px-3 py-1 rounded-full flex gap-1 items-center ${row.status === "Success" ? "text-green-600 bg-green-200" : "bg-[#FFE8E8] text-[#DA1E28]"}`}><GoDotFill />{row.status}</span>
               </td>
