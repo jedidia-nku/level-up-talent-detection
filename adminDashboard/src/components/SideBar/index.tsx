@@ -12,6 +12,7 @@ interface SidebarProps {
   
   const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     // const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [showModal, setShowModal] = useState(false);
   
     const location = useLocation();
     const { pathname } = location;
@@ -63,7 +64,16 @@ interface SidebarProps {
 
     const handleLogout = () => {
       // dispatch(logOut());
-      navigate("/");
+     setTimeout (() => navigate("/"), 2000);
+    };
+
+    const handleConfirmLogout = () => {
+      handleLogout();
+      setShowModal(false);
+    };
+  
+    const handleCancelLogout = () => {
+      setShowModal(false);
     };
 
   return (
@@ -71,9 +81,17 @@ interface SidebarProps {
     ref={sidebar}
      className="h-screen hidden md:flex flex-col w-64 bg-gray-800">
         <div className="flex items-center justify-center h-16 bg-gray-900">
-        <NavLink to="/">
-          <span className="text-white font-bold uppercase">Level-up Talent Detection</span>
-        </NavLink>
+        <div className="flex flex-shrink-0 p-4">
+            <a href="#" className="text-2xl font-bold text-gray-100">
+              LEVEL
+            </a>
+            <div className="flex items-center">
+          <img src="/logo.png" className="h-8"/>
+          <a href="#" className="text-2xl font-bold text-gray-100">
+          UP
+          </a>
+        </div>
+          </div>
         </div>
         <div className="flex flex-col flex-1 overflow-y-auto">
           <nav className="flex-1 bg-gray-800">
@@ -102,7 +120,7 @@ interface SidebarProps {
           </li>
           <li>
           <button
-          onClick={handleLogout}
+          onClick={() => setShowModal(true)}
           className={`group relative flex items-center gap-2 py-2 px-4 text-gray-100 duration-300 ease-in-out hover:bg-graydark hover:rounded-full`}>
             <IoLogOutOutline className='text-lg' />
             Log Out
@@ -113,6 +131,29 @@ interface SidebarProps {
         </div>
         </nav>
         </div>
+        
+    {showModal && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="bg-white rounded-lg p-6 w-[90%] max-w-sm">
+          <h2 className="text-lg font-semibold mb-4">Confirm Logout</h2>
+          <p className="text-sm text-gray-600 mb-6">Are you sure you want to logout?</p>
+          <div className="flex justify-end gap-4">
+            <button
+              onClick={handleCancelLogout}
+              className="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleConfirmLogout}
+              className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
     </div>
   )
 }

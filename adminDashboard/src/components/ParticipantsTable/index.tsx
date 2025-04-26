@@ -1,34 +1,132 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { LuCloudDownload } from "react-icons/lu";
 import { IoFilterSharp } from "react-icons/io5";
-// import { FaArrowDownLong } from "react-icons/fa6";
+// import { FaArparticipantDownLong } from "react-icons/fa6";
 import { GoDotFill } from "react-icons/go";
+import axios from "axios";
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
-const data = Array.from({ length: 14 }, (_, index) => ({
-  ParticipantId: `123456789${index + 1}`,
-  fullName: "James Adeleke",
-  email: "JA@gmail.com",
-  telephone: "25078000766",
-  registrationDate: "12/04/2024",
-  yearsOfExperience: "3",
-  location: "Kigali",
-  gender: "Male",
-  levelOfEducation: "Secondary",
-  musicGenre: "Rap",
-  amount: '2500Rwf',
-  method: "Momo Pay",
-  status: Math.random() > 0.5 ? "Success" : "Success",
-}));
+interface Participant {
+  _id: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  email: string;
+  telephone: string;
+  registrationDate: string;
+  careerExperience: string;
+  age: string;
+  province: string;
+  district: string;
+  sector: string;
+  gender: string;
+  educationLevel: string;
+  musicGenre: string;
+  amount: string;
+  method: string;
+  status: string;
+}
 
 const ParticipantsTable: React.FC = () => {
+  const [participants, setParticipants] = useState<Participant[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchParticipants = async () => {
+      try {
+        const response = await axios.get<Participant[]>("http://localhost:5000/api/participants");
+        setParticipants(response.data);
+      } catch (error) {
+        console.error("Failed to fetch participants", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchParticipants();
+  }, []);
+
+  if (loading) {
+    return <div>Loading participants...</div>;
+  }
+
+
+  //Export pdf file codes
+  const exportPDF = () => {
+    const doc = new jsPDF();
+
+    const tableColumn = [
+      "Full Name",
+      "Email",
+      "Telephone",
+      "Registration Date",
+      "Age",
+      "Province",
+      "Gender",
+      "Music Genre",
+    ];
+
+    const tableRows: any[] =[];
+
+    participants.forEach((participant) => {
+      const fullName = `${participant.firstName} ${participant.middleName || ""} ${participant.lastName}`;
+    const formattedDate = new Date(participant.registrationDate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+
+    const participantData = [
+      fullName,
+      participant.email,
+      participant.telephone,
+      formattedDate,
+      participant.age,
+      participant.province,
+      participant.gender,
+      participant.musicGenre,
+
+    ];
+    tableRows.push(participantData);
+  });
+
+  autoTable(doc, {
+    head: [tableColumn],
+    body: tableRows,
+    startY: 20,
+    styles: {
+      overflow: 'linebreak',
+      cellWidth: 'wrap',
+      fontSize: 8,
+      cellPadding: 2, // merged here
+    },
+    headStyles: {
+      fillColor: [22, 160, 133],
+      textColor: 255,
+      halign: 'center',
+    },
+    bodyStyles: {
+      halign: 'center',
+    },
+    theme: 'grid',
+    tableWidth: 'wrap',
+  });  
+
+  doc.text('Participants List', 14, 15);
+  doc.save('participants.pdf');
+      
+  };
 
   return (
     <div className="bg-white px-4 py-2 rounded-2xl w-full">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <p className="text-gray-600">Al Payment Made</p>
-        <button className="flex items-center border border-[#000] px-4 py-2 rounded-lg shadow-sm">
+        <button className="flex items-center border border-[#000] px-4 py-2 rounded-lg shadow-sm"
+        onClick={exportPDF}
+        >
           <LuCloudDownload className="mr-2" /> Export
         </button>
       </div>
@@ -43,7 +141,7 @@ const ParticipantsTable: React.FC = () => {
               placeholder="Search"
               className="border px-4 py-2 md:py-2 rounded-lg focus:outline-none pl-10 w-48 md:w-full"
             />
-            <FaSearch className="absolute left-3 top-3 text-gray-400" />
+            <FaSearch className="absolute left-3 top-3 text-gray-400"/>
           </div>
           <button className="border border-[#979797] px-3 py-1 md:px-4 md:py-2 flex gap-2 items-center rounded-lg shadow-sm">
           <IoFilterSharp className="text-lg"/> Filters
@@ -66,7 +164,10 @@ const ParticipantsTable: React.FC = () => {
               "Telephone",
               "Registration Date",
               "Years of Experience",
-              "Location",
+              "Age",
+              "Province",
+              "District",
+              "Sector",
               "Gender",
               "Level of Education",
               "Music Genre",
@@ -82,28 +183,38 @@ const ParticipantsTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((row, index) => (
+        {participants.map((participant) => {
+          const fullName = `${participant.firstName} ${participant.middleName || ""} ${participant.lastName}`;
+          const formattedDate = new Date(participant.registrationDate).toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          });
+            return(
             <tr
-              key={index}
+              key={participant._id}
               className="border-b hover:bg-gray-100 transition duration-200"
             >
               <td className="p-3 hidden sm:table-cell">
                 <input type="checkbox" className="w-4 h-4" />
               </td>
-              <td className="p-3 text-sm hidden sm:table-cell">{row.ParticipantId}</td>
-              <td className="p-3 text-sm hidden sm:table-cell whitespace-nowrap">{row.fullName}</td>
-              <td className="p-3 text-sm hidden sm:table-cell">{row.email}</td>
-              <td className="p-3 text-sm hidden sm:table-cell whitespace-nowrap">{row.telephone}</td>
-              <td className="p-3 text-sm hidden sm:table-cell">{row.registrationDate}</td>
-              <td className="p-3 text-sm hidden sm:table-cell">{row.yearsOfExperience}</td>
-              <td className="p-3 text-sm hidden sm:table-cell">{row.location}</td>
-              <td className="p-3 text-sm hidden sm:table-cell">{row.gender}</td>
-              <td className="p-3 text-sm hidden sm:table-cell">{row.levelOfEducation}</td>
-              <td className="p-3 text-sm hidden sm:table-cell">{row.musicGenre}</td>
-              <td className="p-3 text-sm hidden sm:table-cell">{row.amount}</td>
-              <td className="p-3 text-sm hidden sm:table-cell whitespace-nowrap">{row.method}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">{participant._id}</td>
+              <td className="p-3 text-sm hidden sm:table-cell whitespace-nowrap">{fullName}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">{participant.email}</td>
+              <td className="p-3 text-sm hidden sm:table-cell whitespace-nowrap">{participant.telephone}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">{formattedDate}</td>
+              <td className="p-3 text-sm hidden sm:table-cell text-center">{participant.careerExperience}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">{participant.age}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">{participant.province}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">{participant.district}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">{participant.sector}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">{participant.gender}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">{participant.educationLevel}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">{participant.musicGenre}</td>
+              <td className="p-3 text-sm hidden sm:table-cell">2500Rwf</td>
+              <td className="p-3 text-sm hidden sm:table-cell whitespace-nowrap">Momo Pay</td>
               <td className="p-3 text-sm hidden sm:table-cell">
-                <span className={`px-3 py-1 rounded-full flex gap-1 items-center ${row.status === "Success" ? "text-green-600 bg-green-200" : "bg-[#FFE8E8] text-[#DA1E28]"}`}><GoDotFill />{row.status}</span>
+                <span className="px-3 py-1 rounded-full flex gap-1 items-center text-green-600 bg-green-200"><GoDotFill />Success</span>
               </td>
               <td className="p-3 cursor-pointer hidden sm:table-cell">⋮</td>
               
@@ -112,65 +223,77 @@ const ParticipantsTable: React.FC = () => {
                   <div className="flex flex-col space-y-2">
                       <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
-                              <p className="text-sm font-medium">{row.fullName}</p>
+                              <p className="text-sm font-medium">{fullName}</p>
                           </div>
                           <div className="text-xs px-2 py-1 rounded-full font-medium text-gray-600">
-                          {row.email}
+                          {participant.email}
                           </div>
                       </div>
 
                       <div className="flex justify-between text-sm text-gray-600">
                           <span>Participant ID:</span>
-                          <span className="font-semibold">{row.ParticipantId}</span>
+                          <span className="font-semibold">{participant._id}</span>
                       </div>
 
                       <div className="flex justify-between text-sm text-gray-600">
                           <span>Telephone:</span>
-                          <span className="font-semibold">{row.telephone}</span>
+                          <span className="font-semibold">{participant.telephone}</span>
                       </div>
 
                       <div className="flex justify-between text-sm text-gray-600">
                           <span>Registration Date:</span>
-                          <span className="font-semibold">{row.registrationDate}</span>
+                          <span className="font-semibold">{formattedDate}</span>
                       </div>
 
                       <div className="flex justify-between text-sm text-gray-600">
                           <span>Years of Experience:</span>
-                          <span className="font-semibold">{row.yearsOfExperience}</span>
+                          <span className="font-semibold">{participant.careerExperience}</span>
                       </div>
 
                       <div className="flex justify-between text-sm text-gray-600">
-                          <span>Location:</span>
-                          <span className="font-semibold">{row.location}</span>
+                          <span>Age:</span>
+                          <span className="font-semibold">{participant.age}</span>
+                      </div>
+                      <div className="flex justify-between text-sm text-gray-600">
+                          <span>Province:</span>
+                          <span className="font-semibold">{participant.province}</span>
+                      </div>
+                      <div className="flex justify-between text-sm text-gray-600">
+                          <span>District:</span>
+                          <span className="font-semibold">{participant.district}</span>
+                      </div>
+                      <div className="flex justify-between text-sm text-gray-600">
+                          <span>Sector:</span>
+                          <span className="font-semibold">{participant.sector}</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600">
                           <span>Gender:</span>
-                          <span className="font-semibold">{row.gender}</span>
+                          <span className="font-semibold">{participant.gender}</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600">
                           <span>Level of Education:</span>
-                          <span className="font-semibold">{row.levelOfEducation}</span>
+                          <span className="font-semibold">{participant.educationLevel}</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600">
                           <span>Music Genre:</span>
-                          <span className="font-semibold">{row.musicGenre}</span>
+                          <span className="font-semibold">{participant.musicGenre}</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600">
                           <span>Amount:</span>
-                          <span className="font-semibold">{row.amount}</span>
+                          <span className="font-semibold">2500Rwf</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600">
                           <span>Method:</span>
-                          <span className="font-semibold">{row.method}</span>
+                          <span className="font-semibold whitespace-nowrap">Momo Pay</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600">
                           <span>Status:</span>
-                          <span className={`px-3 py-1 rounded-full flex gap-1 items-center ${row.status === "Success" ? "text-green-600 bg-green-200" : "bg-[#FFE8E8] text-[#DA1E28]"}`}><GoDotFill />{row.status}</span>
+                          <span className="px-3 py-1 rounded-full flex gap-1 items-center text-green-600 bg-green-200"><GoDotFill />Success</span>
                       </div>
                   </div>
               </td>
-            </tr>
-          ))}
+            </tr>)
+      })}
         </tbody>
       </table>
     </div>

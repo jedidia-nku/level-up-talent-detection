@@ -153,7 +153,11 @@ return (
       <div className="relative">
       <button
       onClick={() => setIsNewsModalOpen(true)}
-       className="bg-gray-700 text-white px-4 py-2 flex gap-2 items-center rounded-sm shadow-sm whitespace-nowrap">
+       className="text-white px-4 py-2 flex gap-2 items-center rounded-sm shadow-sm whitespace-nowrap"
+       style={{
+        background: "linear-gradient(90deg, #1C5CA6 5%,rgb(5, 25, 49) 329.93%)",
+      }}
+      >
         Add News
       </button>
       </div>
@@ -256,7 +260,10 @@ return (
       <div className="relative">
       <button
       onClick={() => setIsOpen(true)}
-       className="bg-gray-700 text-white px-4 py-2 flex gap-2 items-center rounded-sm shadow-sm whitespace-nowrap">
+       className="text-white px-4 py-2 flex gap-2 items-center rounded-sm shadow-sm whitespace-nowrap"
+       style={{
+        background: "linear-gradient(90deg, #1C5CA6 5%,rgb(5, 25, 49) 329.93%)",
+      }}>
         Add Photo
       </button>
       </div>

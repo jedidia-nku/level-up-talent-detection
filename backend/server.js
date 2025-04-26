@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 connectDB();
 
 // Routes
-app.use('/api/register', participantRoutes);
+app.use('/api/participants', participantRoutes);
 app.use("/api/contact", contactRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use("/api/news", newsRoutes);

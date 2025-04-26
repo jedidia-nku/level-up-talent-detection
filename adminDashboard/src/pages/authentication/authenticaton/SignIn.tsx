@@ -57,12 +57,12 @@ const SignIn = () => {
             <a href="#" className="text-2xl font-bold text-gray-800">
               LEVEL
             </a>
-            <a href="#" className="flex items-center">
+            <div className="flex items-center">
           <img src="/logo.png" className="h-10"/>
           <a href="#" className="text-2xl font-bold text-gray-800">
           UP
           </a>
-        </a>
+        </div>
           </div>
 
           <div className="flex justify-center items-center">
