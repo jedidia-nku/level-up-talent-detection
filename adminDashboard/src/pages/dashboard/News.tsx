@@ -77,7 +77,7 @@ const [currentNewsId, setCurrentNewsId] = useState<string | null>(null);
     }
   
     try {
-      await axios.put(`http://localhost:5000/api/news/${currentNewsId}`, formData, {
+      await axios.put(`https://level-up-talent-detection.onrender.com/api/news/${currentNewsId}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success("News updated successfully!", {
@@ -105,7 +105,7 @@ const handleDelete = async () => {
     }
   
     try {
-      await axios.delete(`http://localhost:5000/api/news/${currentNewsId}`);
+      await axios.delete(`https://level-up-talent-detection.onrender.com/api/news/${currentNewsId}`);
       console.log("News deleted!");
       toast.success("News deleted successfully!");
       setShowModal(false);
@@ -279,7 +279,7 @@ useEffect(() => {
                 />
                 {typeof news.image === "string" && (
                 <img
-                    src={`http://localhost:5000${news.image}`}
+                    src={`https://level-up-talent-detection.onrender.com${news.image}`}
                     alt="Current"
                     className="w-32 h-20 object-cover mb-2 rounded"
                 />

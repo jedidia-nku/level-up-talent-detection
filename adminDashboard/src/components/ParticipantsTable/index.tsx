@@ -43,7 +43,7 @@ const limit = 14
 
 const fetchParticipants = async () => {
   try {
-    const res = await fetch(`http://localhost:5000/api/participants?search=${encodeURIComponent(searchQuery)}&page=${page}&limit=${limit}`);
+    const res = await fetch(`https://level-up-talent-detection.onrender.com/api/participants?search=${encodeURIComponent(searchQuery)}&page=${page}&limit=${limit}`);
     const data = await res.json();
     setParticipants(data.participants);
     setTotalPages(data.totalPages);

@@ -12,7 +12,7 @@ const Gallery: React.FC = () => {
     useEffect(() => {
         const fetchImages = async () => {
           try {
-            const res = await axios.get("http://localhost:5000/api/upload");
+            const res = await axios.get("https://level-up-talent-detection.onrender.com/api/upload");
             setImages(res.data);
           } catch (err) {
             console.error("Failed to fetch images", err);
@@ -24,7 +24,7 @@ const Gallery: React.FC = () => {
 
       const handleDelete = async (filename: string) => {
         try {
-          await axios.delete(`http://localhost:5000/api/upload/image/${filename}`);
+          await axios.delete(`https://level-up-talent-detection.onrender.com/api/upload/image/${filename}`);
           toast.success("Image deleted successfully!");
 
           setImages((prev) => prev.filter((img) => img.filename !== filename));

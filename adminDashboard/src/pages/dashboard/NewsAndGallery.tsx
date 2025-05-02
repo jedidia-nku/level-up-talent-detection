@@ -45,6 +45,20 @@ const NewsandGallery: React.FC = () => {
     setNews({ ...news, image: file });
   };
 
+  
+  const fetchNews = async () => {
+    try {
+      setLoading(true); // start loading
+      const res = await axios.get("https://level-up-talent-detection.onrender.com/api/news");
+      setNewsList(res.data || []);
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      setError("Failed to fetch news. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
@@ -56,7 +70,7 @@ const NewsandGallery: React.FC = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:5000/api/news", {
+      const response = await fetch("https://level-up-talent-detection.onrender.com/api/news", {
         method: "POST",
         body: formData,
       });
@@ -73,9 +87,13 @@ const NewsandGallery: React.FC = () => {
         theme: "colored",
       });
   
-      // Reset form and close modal
-      setNews({ title: "", description: "", image: null });
-      setIsNewsModalOpen(false);
+          // Reset form
+    setNews({ title: "", description: "", image: null });
+    setIsNewsModalOpen(false);
+
+    // 🔁 Refresh the news list
+    await fetchNews();
+
     } catch (error: any) {
       console.error("Upload failed:", error);
       toast.error(error?.response?.data?.message || "Network error or server not responding.");
@@ -83,33 +101,23 @@ const NewsandGallery: React.FC = () => {
   };
 
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        setLoading(true); // start loading
-        const res = await axios.get("http://localhost:5000/api/news");
-        setNewsList(res.data || []);
-      } catch (error) {
-        console.error("Error fetching news:", error);
-        setError("Failed to fetch news. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchNews();
 
   }, []);
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/api/upload");
-        setImages(res.data);
-      } catch (err) {
-        console.error("Failed to fetch images", err);
-      }
-    };
 
+  
+  const fetchImages = async () => {
+    try {
+      const res = await axios.get("https://level-up-talent-detection.onrender.com/api/upload");
+      setImages(res.data);
+    } catch (err) {
+      console.error("Failed to fetch images", err);
+    }
+  };
+
+  
+  useEffect(() => {
     fetchImages();
   }, []);
 
@@ -120,7 +128,7 @@ const NewsandGallery: React.FC = () => {
     formData.append("photo", file);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/upload", formData, {
+      const response = await axios.post("https://level-up-talent-detection.onrender.com/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -140,6 +148,8 @@ const NewsandGallery: React.FC = () => {
   
       console.log("Uploaded successfully:", data);
       setIsOpen(false);
+
+      await fetchImages()
     } catch (error: any) {
       console.error("Upload failed:", error);
       toast.error(error?.response?.data?.message || "Network error or server not responding.");
@@ -212,7 +222,7 @@ return (
                 minHeight: "300px",
                 backgroundImage: `url("${
           selectedNews
-            && `http://localhost:5000${selectedNews.imageUrl}`
+            && `https://level-up-talent-detection.onrender.com${selectedNews.imageUrl}`
         }")`,
       }}
       title={selectedNews?.title ?? undefined}
@@ -262,7 +272,7 @@ return (
           >
           <a href="#">
               <div className="h-40 bg-cover text-center overflow-hidden"
-                  style={{backgroundImage: `url('http://localhost:5000${item.imageUrl}')`}}
+                  style={{backgroundImage: `url('https://level-up-talent-detection.onrender.com${item.imageUrl}')`}}
                   title="Woman holding a mug">
               </div>
           </a>
