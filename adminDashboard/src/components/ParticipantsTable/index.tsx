@@ -4,7 +4,7 @@ import { LuCloudDownload } from "react-icons/lu";
 import { IoFilterSharp } from "react-icons/io5";
 // import { FaArparticipantDownLong } from "react-icons/fa6";
 import { GoDotFill } from "react-icons/go";
-import axios from "axios";
+// import axios from "axios";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -30,23 +30,49 @@ interface Participant {
 }
 
 const ParticipantsTable: React.FC = () => {
-  const [participants, setParticipants] = useState<Participant[]>([]);
-  const [loading, setLoading] = useState(true);
+const [loading, setLoading] = useState(true);
+const [participants, setParticipants] = useState<Participant[]>([]);
+const [page, setPage] = useState(1);
+// const [limit, setLimit] = useState(14);
+const [totalPages, setTotalPages] = useState(1);
+const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    const fetchParticipants = async () => {
-      try {
-        const response = await axios.get<Participant[]>("http://localhost:5000/api/participants");
-        setParticipants(response.data);
-      } catch (error) {
-        console.error("Failed to fetch participants", error);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchParticipants();
-  }, []);
+// const totalPages = Math.ceil(total / limit);
+const limit = 14
+
+const fetchParticipants = async () => {
+  try {
+    const res = await fetch(`http://localhost:5000/api/participants?search=${encodeURIComponent(searchQuery)}&page=${page}&limit=${limit}`);
+    const data = await res.json();
+    setParticipants(data.participants);
+    setTotalPages(data.totalPages);
+    setLoading(false);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+useEffect(() => {
+  fetchParticipants();
+}, [page, limit]);
+
+const handleSearch = () => {
+  setPage(1); // Reset to first page when new search
+  fetchParticipants();
+};
+
+const handleNext = () => {
+  if (page < totalPages) {
+    setPage(page + 1);
+  }
+};
+
+const handlePrev = () => {
+  if (page > 1) {
+    setPage(page - 1);
+  }
+};
 
   if (loading) {
     return <div>Loading participants...</div>;
@@ -118,7 +144,7 @@ const ParticipantsTable: React.FC = () => {
   doc.save('participants.pdf');
       
   };
-
+  
   return (
     <div className="bg-white px-4 py-2 rounded-2xl w-full">
       {/* Header */}
@@ -140,10 +166,15 @@ const ParticipantsTable: React.FC = () => {
               type="text"
               placeholder="Search"
               className="border px-4 py-2 md:py-2 rounded-lg focus:outline-none pl-10 w-48 md:w-full"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <FaSearch className="absolute left-3 top-3 text-gray-400"/>
           </div>
-          <button className="border border-[#979797] px-3 py-1 md:px-4 md:py-2 flex gap-2 items-center rounded-lg shadow-sm">
+          <button 
+          className="border border-[#979797] px-3 py-1 md:px-4 md:py-2 flex gap-2 items-center rounded-lg shadow-sm"
+          onClick={handleSearch}
+          >
           <IoFilterSharp className="text-lg"/> Filters
           </button>
         </div>
@@ -300,11 +331,22 @@ const ParticipantsTable: React.FC = () => {
       
       
       {/* Pagination */}
-      <div className="hidden sm:table-cell flex justify-between items-center mt-4">
-        <span>1 - 14 of 40 Pages</span>
+      <div className="flex justify-between items-center mt-4 hidden md:flex">
+        <span>
+          {totalPages > 0
+            ? `${(page - 1) * limit + 1} - ${Math.min(page * limit, totalPages)} of ${totalPages} participants`
+            : "No participants"}</span>
+
         <div className="space-x-2">
-          <button className="bg-gray-200 px-4 py-2 rounded-lg">Previous</button>
-          <button className="bg-gray-200 px-4 py-2 rounded-lg">Next</button>
+
+          <button className="bg-gray-200 px-4 py-2 rounded-lg"
+          onClick={handlePrev}
+          disabled={page === 1}> Previous</button>
+
+          <button className="bg-gray-200 px-4 py-2 rounded-lg"
+          onClick={handleNext}
+          disabled={page === totalPages || totalPages === 0}
+          >Next</button>
         </div>
       </div>
     </div>

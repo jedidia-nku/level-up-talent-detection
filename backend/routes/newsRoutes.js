@@ -57,4 +57,44 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// @route PUT /api/news/:id → Update existing news
+router.put("/:id", upload.single("image"), async (req, res) => {
+  try {
+    const { title, description } = req.body;
+    const updatedFields = { title, description };
+
+    if (req.file) {
+      updatedFields.imageUrl = `/uploads/${req.file.filename}`;
+    }
+
+    const updatedNews = await News.findByIdAndUpdate(
+      req.params.id,
+      updatedFields,
+      { new: true }
+    );
+
+    if (!updatedNews) {
+      return res.status(404).json({ message: "News not found" });
+    }
+
+    res.status(200).json({ message: "News updated", news: updatedNews });
+  } catch (error) {
+    console.error("Error updating news:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedNews = await News.findByIdAndDelete(req.params.id);
+    if (!deletedNews) {
+      return res.status(404).json({ message: "News not found" });
+    }
+    res.status(200).json({ message: "News deleted" });
+  } catch (error) {
+    console.error("Error deleting news:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = router;

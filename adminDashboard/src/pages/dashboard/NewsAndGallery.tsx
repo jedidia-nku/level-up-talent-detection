@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import {motion} from "framer-motion";
+import { Link } from "react-router-dom";
 // import { LuPlus } from "react-icons/lu";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaArrowRightLong } from "react-icons/fa6";
 
 interface NewsItem {
   _id?: string;
@@ -30,6 +32,8 @@ const NewsandGallery: React.FC = () => {
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -52,7 +56,7 @@ const NewsandGallery: React.FC = () => {
     }
   
     try {
-      const response = await fetch("https://level-up-talent-detection.onrender.com/api/news", {
+      const response = await fetch("http://localhost:5000/api/news", {
         method: "POST",
         body: formData,
       });
@@ -82,7 +86,7 @@ const NewsandGallery: React.FC = () => {
     const fetchNews = async () => {
       try {
         setLoading(true); // start loading
-        const res = await axios.get("https://level-up-talent-detection.onrender.com/api/news");
+        const res = await axios.get("http://localhost:5000/api/news");
         setNewsList(res.data || []);
       } catch (error) {
         console.error("Error fetching news:", error);
@@ -99,7 +103,7 @@ const NewsandGallery: React.FC = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await axios.get("https://level-up-talent-detection.onrender.com/api/upload");
+        const res = await axios.get("http://localhost:5000/api/upload");
         setImages(res.data);
       } catch (err) {
         console.error("Failed to fetch images", err);
@@ -116,7 +120,7 @@ const NewsandGallery: React.FC = () => {
     formData.append("photo", file);
 
     try {
-      const response = await axios.post("https://level-up-talent-detection.onrender.com/api/upload", formData, {
+      const response = await axios.post("http://localhost:5000/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -141,7 +145,12 @@ const NewsandGallery: React.FC = () => {
       toast.error(error?.response?.data?.message || "Network error or server not responding.");
     }
   };
-  
+
+  useEffect(() => {
+    if (newsList.length > 0 && !selectedNews) {
+      setSelectedNews(newsList[0]);
+    }
+  }, [newsList, selectedNews]);
 
 return (
 <div>
@@ -186,7 +195,7 @@ return (
       }} className="text-gray-600">Providing Fresh Produce Every Single Day
       </motion.p>
   </div>
-<div className="grid grid-cols-1 sm:grid-cols-12 gap-5">
+<div className="grid grid-cols-1 md:grid-cols-12 gap-5">
     <motion.div
     initial={{ opacity:0, y: -100 }}
     whileInView={{ opacity:1, y: 0 }}
@@ -201,9 +210,12 @@ return (
                 className="bg-cover text-center overflow-hidden"
                 style={{
                 minHeight: "300px",
-                backgroundImage: `url("https://api.time.com/wp-content/uploads/2020/07/never-trumpers-2020-election-01.jpg?quality=85&w=1201&h=676&crop=1")`,
-                }}
-                title="Woman holding a mug"
+                backgroundImage: `url("${
+          selectedNews
+            && `http://localhost:5000${selectedNews.imageUrl}`
+        }")`,
+      }}
+      title={selectedNews?.title ?? undefined}
             ></div>
             </a>
             <div>
@@ -211,47 +223,67 @@ return (
             <div
                 className="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
                 <div className="">
-                    <a href="#"
-                        className="text-xs text-yellow-500 uppercase font-medium hover:text-gray-900 transition duration-500 ease-in-out">
-                        Election
-                    </a>
-                    <a href="#"
-                        className="block text-gray-900 font-bold text-2xl mb-2 hover:text-yellow-500 transition duration-500 ease-in-out">Revenge
-                        of the Never Trumpers</a>
-                    <p className="text-gray-700 text-base mt-2">Meet the Republican dissidents fighting to push Donald Trump
-                        out of office—and reclaim their party</p>
+                    <p className="text-gray-900 font-bold text-2xl mb-2 hover:text-yellow-500 line-clamp-2">
+                          {selectedNews && selectedNews.title}
+                        </p>
+                    <p className="text-gray-700 text-base mt-2 line-clamp-3">
+                    {selectedNews
+                    && selectedNews.description}
+                    </p>
+                    <div className="w-full flex justify-end px-6 mt-3">
+                    {selectedNews && (
+                    <Link to={`/news/${selectedNews._id}`} className="flex justify-center items-center gap-2 border px-2 rounded-md border-gray-300 hover:border-yellow-500 hover:text-yellow-500 transition duration-500 ease-in-out" >
+                      Read more <FaArrowRightLong />
+                    </Link>
+                  )}
+                  </div>
                 </div>
             </div>
         </motion.div>
 
-        {!loading && !error && (
-        <div className="sm:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5">
-        {newsList.map((item) => ( 
-                <motion.div
-                key={item._id}
-                initial={{ opacity:0, y: -100 }}
-                whileInView={{ opacity:1, y: 0 }}
-                transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 10,
-                delay: 0.4,
-                }}>
-                <a href="#">
-                    <div className="h-40 bg-cover text-center overflow-hidden"
-                        style={{backgroundImage: `url('https://level-up-talent-detection.onrender.com${item.imageUrl}')`}}
-                        title="Woman holding a mug">
-                    </div>
-                </a>
-                <a href="#"
-                    className="text-gray-900 inline-block font-semibold text-md my-2 hover:text-yellow-500 transition duration-500 ease-in-out">{item.title}</a>
-            </motion.div>
-            ))}
-        </div>
-        )}
+  {!loading && !error && (
+  <div className="md:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5 pt-8 md:pt-1">
+  {newsList
+  .filter((item) => item._id !== selectedNews?._id)
+  .slice(0, newsList.length <= 6 ? newsList.length : 6)
+    .map((item) => ( 
+          <motion.div
+          key={item._id}
+          initial={{ opacity:0, y: -100 }}
+          whileInView={{ opacity:1, y: 0 }}
+          transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 10,
+          delay: 0.4,
+          }}
+          onClick={() => setSelectedNews(item)}
+          className="cursor-pointer"
+          >
+          <a href="#">
+              <div className="h-40 bg-cover text-center overflow-hidden"
+                  style={{backgroundImage: `url('http://localhost:5000${item.imageUrl}')`}}
+                  title="Woman holding a mug">
+              </div>
+          </a>
+          <p className="text-gray-900 font-semibold text-md my-2 hover:text-yellow-500 line-clamp-2">{item.title}</p>
+      </motion.div>
+      ))}
+  </div>
+  )}
 
 </div>
 </div>
+{newsList.length > 6 && (
+      <div className="flex justify-end mb-4 px-10">
+        <Link
+          to="/news"
+          className="px-4 py-2 text-sm font-semibold text-white bg-yellow-500 rounded hover:bg-yellow-600 transition duration-300"
+        >
+          View More
+        </Link>
+      </div>
+    )}
 
 <div className="flex items-center justify-between gap-4 px-5"> 
 <div className="container mx-auto text-center p-5 mb-4">
@@ -292,7 +324,9 @@ return (
     </motion.p>
       
     <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-12">
-    {images.map((img) => (<div key={img.filename}>
+    {images
+    .slice(0, newsList.length <= 6 ? newsList.length : 6)
+    .map((img) => (<div key={img.filename}  onClick={() => setSelectedImage(img.url)} className="cursor-pointer">
     <motion.img
     initial={{ opacity:0, y: -100 }}
     whileInView={{ opacity:1, y: 0 }}
@@ -304,6 +338,16 @@ return (
     }}className="h-auto max-w-full rounded-lg" src={img.url} alt={img.filename} />
       </div>))}
       </div>
+      {images.length > 6 && (
+      <div className="flex justify-end mb-4 px-10 w-full mt-10">
+        <Link
+          to="/gallery"
+          className="px-4 py-2 text-sm font-semibold text-white bg-yellow-500 rounded hover:bg-yellow-600 transition duration-300"
+        >
+          View more images
+        </Link>
+      </div>
+    )}
     </div>
 </div>
 {isOpen && (
@@ -387,6 +431,18 @@ return (
         </button>
       </form>
     </div>
+  </div>
+)}
+{selectedImage && (
+  <div
+    className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+    onClick={() => setSelectedImage(null)} // Close when clicked
+  >
+    <img
+      src={selectedImage}
+      alt="Full Screen"
+      className="max-w-full rounded-lg h-[90%]"
+    />
   </div>
 )}
 <ToastContainer />

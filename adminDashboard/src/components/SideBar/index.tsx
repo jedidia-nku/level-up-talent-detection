@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { LuUsersRound } from "react-icons/lu";
 import { RiGalleryView2 } from "react-icons/ri";
 import { IoSettingsOutline, IoLogOutOutline } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -14,9 +14,9 @@ interface SidebarProps {
     // const [sidebarOpen, setSidebarOpen] = useState(true);
     const [showModal, setShowModal] = useState(false);
   
-    const location = useLocation();
-    const { pathname } = location;
-    const dispatch = useDispatch();
+    // const location = useLocation();
+    // const { pathname } = location;
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const trigger = useRef<any>(null);
@@ -79,7 +79,7 @@ interface SidebarProps {
   return (
     <div
     ref={sidebar}
-     className="h-screen hidden md:flex flex-col w-64 bg-gray-800">
+     className="h-screen hidden md:flex flex-col md:w-44 lg:w-64 bg-gray-800">
         <div className="flex items-center justify-center h-16 bg-gray-900">
         <div className="flex flex-shrink-0 p-4">
             <a href="#" className="text-2xl font-bold text-gray-100">
