@@ -222,7 +222,7 @@ return (
                 minHeight: "300px",
                 backgroundImage: `url("${
           selectedNews
-            && `https://level-up-talent-detection.onrender.com${selectedNews.imageUrl}`
+            && `https://level-up-talent-detection.onrender.com${selectedNews?.imageUrl}`
         }")`,
       }}
       title={selectedNews?.title ?? undefined}
@@ -272,7 +272,7 @@ return (
           >
           <a href="#">
               <div className="h-40 bg-cover text-center overflow-hidden"
-                  style={{backgroundImage: `url('https://level-up-talent-detection.onrender.com${item.imageUrl}')`}}
+                  style={{backgroundImage: `url("https://level-up-talent-detection.onrender.com${item.imageUrl}")`}}
                   title="Woman holding a mug">
               </div>
           </a>
