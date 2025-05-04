@@ -42,22 +42,6 @@ router.post("/", upload.single("photo"), async (req, res) => {
   });
 });
 
-// ✅ NEW: GET /api/upload – Return list of uploaded images
-// router.get("/", (req, res) => {
-//   fs.readdir(uploadDir, (err, files) => {
-//     if (err) {
-//       return res.status(500).json({ message: "Failed to read uploaded files." });
-//     }
-
-//     const fileUrls = files.map(file => ({
-//       filename: file,
-//       url: `https://level-up-talent-detection.onrender.com/uploads/${file}`,
-//     }));
-
-//     res.status(200).json(fileUrls);
-//   });
-// });
-
 // ✅ GET /api/upload – Get list of images from Cloudinary
 router.get("/", async (req, res) => {
   try {
@@ -92,4 +76,5 @@ router.delete("/image/:filename", (req, res) => {
     res.status(200).json({ message: "Image deleted successfully." });
   });
 });
+
 module.exports = router;
