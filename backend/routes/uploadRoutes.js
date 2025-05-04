@@ -63,18 +63,21 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.delete("/image/:filename", (req, res) => {
-  const filename = req.params.filename;
-  const filePath = path.join(__dirname, "../uploads", filename); // adjust path if needed
+// ✅ Delete image from Cloudinary
+router.delete("/image/:public_id", async (req, res) => {
+  const publicId = req.params.public_id;
 
-  fs.unlink(filePath, (err) => {
-    if (err) {
-      console.error("Failed to delete image:", err);
-      return res.status(500).json({ message: "Failed to delete image." });
+  try {
+    const result = await cloudinary.uploader.destroy(publicId);
+
+    if (result.result === "ok") {
+      return res.status(200).json({ message: "Image deleted successfully." });
+    } else {
+      return res.status(400).json({ message: "Failed to delete image from Cloudinary." });
     }
-
-    res.status(200).json({ message: "Image deleted successfully." });
-  });
+  } catch (err) {
+    console.error("Cloudinary delete error:", err);
+    res.status(500).json({ message: "Server error while deleting image." });
+  }
 });
-
 module.exports = router;

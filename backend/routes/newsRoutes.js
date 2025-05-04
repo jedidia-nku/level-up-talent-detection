@@ -39,8 +39,8 @@ router.post("/", upload.single("image"), async (req, res) => {
     const newNews = new News({
       title,
       description,
-      imageUrl: result.secure_url, // Use Cloudinary URL
-      imagePublicId: result.public_id, // Save public_id if you want to delete/update it later
+      imageUrl: result.secure_url,
+      imagePublicId: result.public_id,
     });
 
     await newNews.save();
