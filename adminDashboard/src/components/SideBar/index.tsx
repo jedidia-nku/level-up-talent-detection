@@ -19,7 +19,7 @@ interface SidebarProps {
     // const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const trigger = useRef<any>(null);
+    // const trigger = useRef<any>(null);
     const sidebar = useRef<any>(null);
   
     const storedSidebarExpanded = localStorage.getItem("sidebar-expanded");
@@ -61,7 +61,7 @@ interface SidebarProps {
         document.removeEventListener('mousedown', handleClickOutside);
       };
     }, [sidebarOpen]);
-    
+
     // close if the esc key is pressed
     useEffect(() => {
       const keyHandler = ({ keyCode }: KeyboardEvent) => {
