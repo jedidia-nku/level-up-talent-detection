@@ -144,7 +144,7 @@ useEffect(() => {
             stiffness: 100,
             damping: 10,
             delay: 0.4,
-          }} className="text-gray-600">Providing Fresh Produce Every Single Day
+          }} className="text-gray-600">Stay informed with the latest updates, stories, and highlights from our community and beyond.
           </motion.p>
       </div>
       {!loading && !error && (

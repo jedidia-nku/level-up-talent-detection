@@ -62,7 +62,7 @@ const Gallery: React.FC = () => {
       stiffness: 100,
       damping: 10,
       delay: 0.4,
-    }} className="text-gray-600">Providing Fresh Produce Every Single Day
+    }} className="text-gray-600">Explore a curated gallery of our latest news highlights and featured stories.
     </motion.p>
       
     <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-12">

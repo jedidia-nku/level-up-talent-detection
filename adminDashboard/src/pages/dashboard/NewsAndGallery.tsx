@@ -202,7 +202,7 @@ return (
         stiffness: 100,
         damping: 10,
         delay: 0.4,
-      }} className="text-gray-600">Providing Fresh Produce Every Single Day
+      }} className="text-gray-600">Stay informed with the latest updates, stories, and highlights from our community and beyond.
       </motion.p>
   </div>
   <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
@@ -334,7 +334,7 @@ return (
       stiffness: 100,
       damping: 10,
       delay: 0.4,
-    }} className="text-gray-600">Providing Fresh Produce Every Single Day
+    }} className="text-gray-600">Explore a curated gallery of our latest news highlights and featured stories.
     </motion.p>
       
     <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-12">
