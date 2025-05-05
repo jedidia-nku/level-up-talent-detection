@@ -1,11 +1,11 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 // import Header from "../components/Header/index";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../components/SideBar";
 import Header from "../components/Header";
 
 const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   const { pathname } = location;
 
@@ -17,15 +17,13 @@ const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className="flex h-screen overflow-hidden">
         {/* <!-- ===== Sidebar Start ===== --> */}
-        {!hideLayout && <Sidebar sidebarOpen={false} setSidebarOpen={function (): void {
-          throw new Error("Function not implemented.");
-        } } />}
+        {!hideLayout && <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Start ===== --> */}
         <div className="relative flex flex-1 flex-col overflow-y-auto">
           {/* <!-- ===== Header Start ===== --> */}
-          {!hideLayout && <Header />}
+          {!hideLayout && <Header setSidebarOpen={setSidebarOpen} />}
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Start ===== --> */}

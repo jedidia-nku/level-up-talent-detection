@@ -1,10 +1,15 @@
-import React from 'react'
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  setSidebarOpen: (arg: boolean) => void;
+}
+
+const Header = ({ setSidebarOpen }: HeaderProps) => {
   return (
     <div className="flex items-center justify-between py-2.5 bg-white border-b border-gray-200">
           <div className="flex items-center px-4">
-            <button className="text-gray-500 focus:outline-none focus:text-gray-700">
+            <button
+             onClick={() => setSidebarOpen(true)}
+              className="text-gray-500 focus:outline-none focus:text-gray-700">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
