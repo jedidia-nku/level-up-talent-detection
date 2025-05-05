@@ -19,7 +19,7 @@ const NewsandGallery: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-  const [images, setImages] = useState<{ filename: string; url: string }[]>([]);
+  const [images, setImages] = useState<{ public_id: string; url: string }[]>([]);
   const [news, setNews] = useState<{
     title: string;
     description: string;
@@ -205,84 +205,88 @@ return (
       }} className="text-gray-600">Providing Fresh Produce Every Single Day
       </motion.p>
   </div>
-<div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-    <motion.div
-    initial={{ opacity:0, y: -100 }}
-    whileInView={{ opacity:1, y: 0 }}
+  <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+  <motion.div
+    initial={{ opacity: 0, y: -100 }}
+    whileInView={{ opacity: 1, y: 0 }}
     transition={{
       type: "spring",
       stiffness: 100,
       damping: 10,
       delay: 0.4,
-    }} className="sm:col-span-5">
-        <a href="#">
-            <div
-                className="bg-cover text-center overflow-hidden"
-                style={{
-                minHeight: "300px",
-                backgroundImage: `url("${
-          selectedNews
-            && `https://level-up-talent-detection.onrender.com${selectedNews?.imageUrl}`
-        }")`,
-      }}
-      title={selectedNews?.title ?? undefined}
-            ></div>
-            </a>
-            <div>
+    }}
+    className="sm:col-span-5"
+  >
+    <a href="#">
+      <div
+        className="bg-cover text-center overflow-hidden"
+        style={{
+          minHeight: "300px",
+          backgroundImage: `url("${selectedNews?.imageUrl}")`,
+        }}
+        title={selectedNews?.title ?? undefined}
+      ></div>
+    </a>
+    <div></div>
+    <div className="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
+      <div className="">
+        <p className="text-gray-900 font-bold text-2xl mb-2 hover:text-yellow-500 line-clamp-2">
+          {selectedNews && selectedNews.title}
+        </p>
+        <p className="text-gray-700 text-base mt-2 line-clamp-3">
+          {selectedNews && selectedNews.description}
+        </p>
+        <div className="w-full flex justify-end px-6 mt-3">
+          {selectedNews && (
+            <Link
+              to={`/news/${selectedNews._id}`}
+              className="flex justify-center items-center gap-2 border px-2 rounded-md border-gray-300 hover:border-yellow-500 hover:text-yellow-500 transition duration-500 ease-in-out"
+            >
+              Read more <FaArrowRightLong />
+            </Link>
+          )}
+        </div>
       </div>
-            <div
-                className="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
-                <div className="">
-                    <p className="text-gray-900 font-bold text-2xl mb-2 hover:text-yellow-500 line-clamp-2">
-                          {selectedNews && selectedNews.title}
-                        </p>
-                    <p className="text-gray-700 text-base mt-2 line-clamp-3">
-                    {selectedNews
-                    && selectedNews.description}
-                    </p>
-                    <div className="w-full flex justify-end px-6 mt-3">
-                    {selectedNews && (
-                    <Link to={`/news/${selectedNews._id}`} className="flex justify-center items-center gap-2 border px-2 rounded-md border-gray-300 hover:border-yellow-500 hover:text-yellow-500 transition duration-500 ease-in-out" >
-                      Read more <FaArrowRightLong />
-                    </Link>
-                  )}
-                  </div>
-                </div>
-            </div>
-        </motion.div>
+    </div>
+  </motion.div>
 
   {!loading && !error && (
-  <div className="md:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5 pt-8 md:pt-1">
-  {newsList
-  .filter((item) => item._id !== selectedNews?._id)
-  .slice(0, newsList.length <= 6 ? newsList.length : 6)
-    .map((item) => ( 
+    <div className="md:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5 pt-8 md:pt-1">
+      {newsList
+        .filter((item) => item._id !== selectedNews?._id)
+        .slice(0, newsList.length <= 6 ? newsList.length : 6)
+        .map((item) => (
           <motion.div
-          key={item._id}
-          initial={{ opacity:0, y: -100 }}
-          whileInView={{ opacity:1, y: 0 }}
-          transition={{
-          type: "spring",
-          stiffness: 100,
-          damping: 10,
-          delay: 0.4,
-          }}
-          onClick={() => setSelectedNews(item)}
-          className="cursor-pointer"
+            key={item._id}
+            initial={{ opacity: 0, y: -100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 10,
+              delay: 0.4,
+            }}
+            onClick={() => setSelectedNews(item)}
+            className="cursor-pointer"
           >
-          <a href="#">
-              <div className="h-40 bg-cover text-center overflow-hidden"
-                  style={{backgroundImage: `url("https://level-up-talent-detection.onrender.com${item.imageUrl}")`}}
-                  title="Woman holding a mug">
-              </div>
-          </a>
-          <p className="text-gray-900 font-semibold text-md my-2 hover:text-yellow-500 line-clamp-2">{item.title}</p>
-      </motion.div>
-      ))}
-  </div>
+            <a href="#">
+              <div
+                className="h-40 bg-cover text-center overflow-hidden"
+                style={{
+                  backgroundImage: `url("${item.imageUrl}")`, // Use the full Cloudinary URL directly
+                }}
+                title="News Image"
+              ></div>
+            </a>
+            <p className="text-gray-900 font-semibold text-md my-2 hover:text-yellow-500 line-clamp-2">
+              {item.title}
+            </p>
+          </motion.div>
+        ))}
+    </div>
   )}
-
 </div>
+
 </div>
 {newsList.length > 6 && (
       <div className="flex justify-end mb-4 px-10">
@@ -336,7 +340,7 @@ return (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-12">
     {images
     .slice(0, newsList.length <= 6 ? newsList.length : 6)
-    .map((img) => (<div key={img.filename}  onClick={() => setSelectedImage(img.url)} className="cursor-pointer">
+    .map((img) => (<div key={img.public_id}  onClick={() => setSelectedImage(img.url)} className="cursor-pointer">
     <motion.img
     initial={{ opacity:0, y: -100 }}
     whileInView={{ opacity:1, y: 0 }}
@@ -345,7 +349,7 @@ return (
       stiffness: 100,
       damping: 10,
       delay: 0.4,
-    }}className="h-auto max-w-full rounded-lg" src={img.url} alt={img.filename} />
+    }}className="h-auto max-w-full rounded-lg" src={img.url} alt={img.public_id} />
       </div>))}
       </div>
       {images.length > 6 && (

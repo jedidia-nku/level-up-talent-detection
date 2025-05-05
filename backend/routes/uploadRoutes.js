@@ -64,8 +64,12 @@ router.get("/", async (req, res) => {
 });
 
 // ✅ Delete image from Cloudinary
-router.delete("/image/:public_id", async (req, res) => {
-  const publicId = req.params.public_id;
+router.delete("/image", async (req, res) => {
+  const publicId = req.query.public_id;
+
+  if (!publicId || typeof publicId !== "string") {
+    return res.status(400).json({ message: "Invalid public_id." });
+  }
 
   try {
     const result = await cloudinary.uploader.destroy(publicId);
@@ -80,4 +84,5 @@ router.delete("/image/:public_id", async (req, res) => {
     res.status(500).json({ message: "Server error while deleting image." });
   }
 });
+
 module.exports = router;

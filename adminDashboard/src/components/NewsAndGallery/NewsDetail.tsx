@@ -52,7 +52,7 @@ function NewsDetail() {
         <div className={`${isStacked ? "w-full" : "w-1/2"}`}>
           <img
             ref={imageRef}
-            src={`https://level-up-talent-detection.onrender.com${news.imageUrl}`}
+            src={`${news.imageUrl}`}
             alt={news.title}
             className="w-full h-auto mb-4"
           />

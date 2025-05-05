@@ -61,10 +61,6 @@ const [currentNewsId, setCurrentNewsId] = useState<string | null>(null);
     fetchNews();
   }, []);
 
-  useEffect(() => {
-    fetchNews();
-    }, []);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
@@ -169,7 +165,7 @@ useEffect(() => {
           >
           <a href="#">
               <div className="h-40 bg-cover text-center overflow-hidden"
-                  style={{backgroundImage: `url('https://level-up-talent-detection.onrender.com${item.imageUrl}')`}}
+                  style={{backgroundImage: `url('${item.imageUrl}')`}}
                   title="Woman holding a mug">
               </div>
           </a>
@@ -279,7 +275,7 @@ useEffect(() => {
                 />
                 {typeof news.image === "string" && (
                 <img
-                    src={`https://level-up-talent-detection.onrender.com${news.image}`}
+                    src={`${news.image}`}
                     alt="Current"
                     className="w-32 h-20 object-cover mb-2 rounded"
                 />

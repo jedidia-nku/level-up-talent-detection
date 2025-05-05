@@ -4,30 +4,34 @@ import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 
 const Gallery: React.FC = () => {
-    const [images, setImages] = useState<{ filename: string; url: string }[]>([]);
+      const [images, setImages] = useState<{ public_id: string; url: string }[]>([]);
       const [selectedImage, setSelectedImage] = useState<string | null>(null);
       const [showModal, setShowModal] = useState(false);
       const [filename, setFilename] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchImages = async () => {
-          try {
-            const res = await axios.get("https://level-up-talent-detection.onrender.com/api/upload");
-            setImages(res.data);
-          } catch (err) {
-            console.error("Failed to fetch images", err);
-          }
-        };
+    const fetchImages = async () => {
+        try {
+          const res = await axios.get("https://level-up-talent-detection.onrender.com/api/upload");
+          setImages(res.data);
+        } catch (err) {
+          console.error("Failed to fetch images", err);
+        }
+      };
     
+      
+      useEffect(() => {
         fetchImages();
       }, []);
 
-      const handleDelete = async (filename: string) => {
+      const handleDelete = async (public_id: string) => {
         try {
-          await axios.delete(`https://level-up-talent-detection.onrender.com/api/upload/image/${filename}`);
+          await axios.delete("http://localhost:5000/api/upload/image", {
+            params: { public_id },
+          });
+
           toast.success("Image deleted successfully!");
 
-          setImages((prev) => prev.filter((img) => img.filename !== filename));
+          setImages((prev) => prev.filter((img) => img.public_id !== public_id));
 
           setShowModal(false);
         } catch (error) {
@@ -63,8 +67,8 @@ const Gallery: React.FC = () => {
       
     <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-12">
     {images.map((img) => (
-    img.filename && (
-    <div key={img.filename} className="cursor-pointer border p-3 rounded-md border-gray-300">
+    img.public_id && (
+    <div key={img.public_id} className="cursor-pointer border p-3 rounded-md border-gray-300">
     <div  onClick={() => setSelectedImage(img.url)}>
     <motion.img
     initial={{ opacity:0, y: -100 }}
@@ -74,7 +78,7 @@ const Gallery: React.FC = () => {
       stiffness: 100,
       damping: 10,
       delay: 0.4,
-    }}className="h-auto max-w-full rounded-lg" src={img.url} alt={img.filename} 
+    }}className="h-auto max-w-full rounded-lg" src={img.url} alt={img.public_id} 
     onError={(e) => e.currentTarget.style.display = 'none'}
     />
     </div>
@@ -82,7 +86,7 @@ const Gallery: React.FC = () => {
     <button
     onClick={
         () => {
-        setFilename(img.filename);
+        setFilename(img.public_id);
         setShowModal(true);
     }} 
      className='flex gap-2 bg-red-300 border rounded-md px-2 py-1 hover:bg-red-400 hover:text-white trasition duration-500 ease-in-out'>Delete 
