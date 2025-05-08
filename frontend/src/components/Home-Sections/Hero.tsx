@@ -32,9 +32,10 @@ const Hero: React.FC = () => {
         }}
          className="text-5xl text-gray-300 font-bold leading-tight mb-4">
          <Typewriter options={{
-           strings: [' Your sound matters.', 'Your story counts.', 'Your journey starts now.'],
+           strings: [' Your sound matters', 'Your story counts', 'Your journey starts now'],
            autoStart: true,
            loop: true,
+           cursor: '',
          }} />
         </motion.h1>
         <motion.div
@@ -47,14 +48,14 @@ const Hero: React.FC = () => {
           delay: 0.4,
         }}>
         <p
-         className="text-lg text-gray-300 mb-8">
-          Where Talent Meets Opportunity.
+         className="text-3xl text-gray-300 mb-8">
+          Where Talent Meets Opportunities.
         </p>
         <a
           href="/registration"
-          className="w-52 mx-auto flex gap-2 justify-center items-center bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all"
+          className="w-52 mx-auto flex gap-2 justify-center items-center bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all duration-500 ease-in-out"
         >
-          <p>Click To Register</p> <TfiPencilAlt />
+          <p className='font-medium'>Click To Register</p> <TfiPencilAlt className='text-xl'/>
         </a>
         </motion.div>
         </div>
@@ -62,11 +63,11 @@ const Hero: React.FC = () => {
 
       {/* Swiper Background */}
       <Swiper
-        spaceBetween={2}
+        spaceBetween={0}
         centeredSlides={true}
         loop={true}
         autoplay={{
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -78,13 +79,13 @@ const Hero: React.FC = () => {
       >
         {/* Background Images */}
         <SwiperSlide>
-          <div className="w-full h-full bg-[url('https://img.freepik.com/photos-gratuite/public-enthousiaste-regardant-feux-artifice-confettis-s-amusant-lors-festival-musique-nuit-espace-copie_637285-559.jpg?t=st=1743271567~exp=1743275167~hmac=914eeaf7cb0252a77f31257e001f4f42b3a94271f3e13ff501e0eee32e65f8e3&w=996')] bg-center bg-cover bg-no-repeat">
+          <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1549761505-ce78ee8354d2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-center bg-cover bg-no-repeat">
             <div className="absolute inset-0 bg-black opacity-50"></div>
           </div>
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="w-full h-full bg-[url('https://media.istockphoto.com/id/811137890/photo/band-performance.jpg?s=1024x1024&w=is&k=20&c=ohbtg_jsi-_63aKaFwAJWn4ylLRbfUsghfWXrsCVcqc=')] bg-center bg-cover bg-no-repeat">
+          <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-center bg-cover bg-no-repeat">
             <div className="absolute inset-0 bg-black opacity-50"></div>
           </div>
         </SwiperSlide>
@@ -96,7 +97,7 @@ const Hero: React.FC = () => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="w-full h-full bg-[url('https://media.istockphoto.com/id/520690051/photo/hands-of-the-man-playing-the-cello.jpg?s=1024x1024&w=is&k=20&c=NTPNlv5qqueP3Etax1a1KPEg6r86db_kBWEqmsIfYDc=')] bg-center bg-cover bg-no-repeat">
+          <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1499442711659-a9566695faed?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-center bg-cover bg-no-repeat">
             <div className="absolute inset-0 bg-black opacity-50"></div>
           </div>
         </SwiperSlide>

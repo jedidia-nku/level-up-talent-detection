@@ -52,7 +52,7 @@ const About: React.FC = () => {
   return (
     <>
     <header className="top-0 bg-white shadow-md fixed w-full z-50">
-      <div className="container mx-auto flex justify-between items-center py-3 px-4">
+      <div className="container mx-auto flex justify-between items-center py-3 font-newtimesRoman px-4">
           {/* Logo Section */}
               <motion.div
               initial={{ opacity:0, y: -100 }}
@@ -124,7 +124,7 @@ const About: React.FC = () => {
       </div>
               {/* Mobile Navigation Menu */}        
           {isMobileMenuOpen && (
-          <div className="space-y-4 p-4">
+          <div className="space-y-4 font-newtimesRoman p-4">
           <a href="/" className="block text-lg hover:text-yellow-200 transition-all">
           Home
           </a>
@@ -151,10 +151,10 @@ const About: React.FC = () => {
         </div>
         )}
     </header>
-    <main className="mt-16">
+    <main className="mt-16 font-newtimesRoman">
     <div
       className="relative bg-cover bg-center text-white py-36"
-      style={{ backgroundImage: "url(https://media.istockphoto.com/id/1811488202/photo/a-businessman-having-presentation-with-colleagues-about-project-he-working-on-at-the-office.jpg?s=1024x1024&w=is&k=20&c=F6XMLSAVHJQW0maiE-Z01cB1dof32OVlKJLDGTzfQvY=)" }}
+      style={{ backgroundImage: "url(https://images.unsplash.com/photo-1518481852452-9415b262eba4?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }}
     >
     <div className="absolute inset-0 bg-black opacity-30"></div>
     <div className="relative z-10 flex flex-col justify-center items-center h-[80%] text-center">
@@ -177,7 +177,7 @@ const About: React.FC = () => {
       stiffness: 100,
       damping: 10,
       delay: 0.4,
-    }} className='mt-2 max-w-[70%]'>
+    }} className='mt-2 text-xl max-w-[70%]'>
       At Level Up Talent Detection, we are dedicated to discovering and empowering exceptional talent across industries.
     </motion.p>
 
@@ -189,13 +189,13 @@ const About: React.FC = () => {
       stiffness: 100,
       damping: 10,
       delay: 0.3,
-    }} className="text-sm mt-3">
+    }} className="text-lg mt-3">
       Home / <span className="text-yellow-400">About</span>
     </motion.p>
       </div>
     </div>
     </main>
-    <section className="about-3 section py-6 max-w-[80%] mx-auto">
+    <section className="about-3 section py-6 max-w-[80%] font-newtimesRoman mx-auto">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between items-center space-y-4 lg:space-y-0">
           {/* Left Column: Image and Video Link */}
@@ -209,7 +209,7 @@ const About: React.FC = () => {
               damping: 10,
               delay: 0.4,
             }}
-              src="https://media.istockphoto.com/id/1262889205/photo/confident-caucasian-male-applicant-answering-on-questions-during-job-interview.jpg?s=1024x1024&w=is&k=20&c=gcjSJQA5djzpJOWzBTIs739ZJASgNDWrEebvLNhmi2E="
+              src="https://images.unsplash.com/photo-1707301280408-8a9158f7613d?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Image"
               className="img-fluid w-full"
             />
@@ -229,7 +229,7 @@ const About: React.FC = () => {
           stiffness: 100,
           damping: 10,
           delay: 0.4,
-        }} className="content-title mb-4 text-3xl font-semibold text-yellow-500">
+        }} className="content-title mb-4 text-3xl font-semibold text-gray-800">
             Why We Organize This Competition
             </motion.h2>
             
@@ -241,7 +241,7 @@ const About: React.FC = () => {
           stiffness: 100,
           damping: 10,
           delay: 0.4,
-        }} className="mb-4 text-gray-600">
+        }} className="mb-4 text-gray-600 text-lg">
             The Level Up Talent Detection competition is designed to uncover 
             extraordinary talent that might otherwise go unnoticed. We’re committed 
             to creating a platform where aspiring professionals, creatives, and innovators 
@@ -296,7 +296,7 @@ const About: React.FC = () => {
       </div>
     </section>
     
-    <section className="about-3 section mt-3 py-6 max-w-[80%] mx-auto">
+    <section className="about-3 section mt-3 py-6 max-w-[80%] font-newtimesRoman mx-auto">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between items-center space-y-4 lg:space-y-0">
           {/* Left Column: Image and Video Link */}
@@ -310,7 +310,7 @@ const About: React.FC = () => {
               damping: 10,
               delay: 0.4,
             }}
-              src="https://media.istockphoto.com/id/1443245439/photo/business-meeting-businesswoman-woman-office-portrait-job-career-happy-businessman-teamwork.jpg?s=1024x1024&w=is&k=20&c=NPqjCnSKcneHXR85l-2ZV5SAe0a32eoTkIy5G0sZtgc="
+              src="https://images.unsplash.com/photo-1675345074859-3ac017e6d834?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Image"
               className="img-fluid w-full"
             />
@@ -330,7 +330,7 @@ const About: React.FC = () => {
               stiffness: 100,
               damping: 10,
               delay: 0.4,
-            }}className="content-title mb-4 text-3xl font-semibold text-yellow-500">
+            }}className="content-title mb-4 text-3xl font-semibold text-gray-800">
             Our Story
             </motion.h2>
             
@@ -342,7 +342,7 @@ const About: React.FC = () => {
               stiffness: 100,
               damping: 10,
               delay: 0.4,
-            }} className="mb-4 text-gray-600">
+            }} className="mb-4 text-gray-600 text-lg">
             Founded with the vision to revolutionize how talent is discovered, 
             Level Up Talent Detection was created to address the growing need for platforms 
             that recognize and amplify talent beyond conventional boundaries. We believe that 
@@ -354,7 +354,7 @@ const About: React.FC = () => {
       </div>
     </section>
 
-    <section className="about-3 section py-6 max-w-[80%] mx-auto">
+    <section className="about-3 section py-6 max-w-[80%] font-newtimesRoman mx-auto">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between items-center space-y-4 lg:space-y-0">
           {/* Left Column: Image and Video Link */}
@@ -368,7 +368,7 @@ const About: React.FC = () => {
               damping: 10,
               delay: 0.4,
             }}
-              src="https://as1.ftcdn.net/jpg/05/39/65/40/1000_F_539654005_M7XZRGAG3TAarymgapSSgSUdgkNKQL2G.jpg"
+              src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Image"
               className="img-fluid w-full"
             />
@@ -388,7 +388,7 @@ const About: React.FC = () => {
               stiffness: 100,
               damping: 10,
               delay: 0.4,
-            }} className="content-title mb-4 text-3xl font-semibold text-yellow-500">
+            }} className="content-title mb-4 text-3xl font-semibold text-gray-800">
             Our Mission
             </motion.h2>
             
@@ -400,7 +400,7 @@ const About: React.FC = () => {
               stiffness: 100,
               damping: 10,
               delay: 0.4,
-            }} className="mb-4 text-gray-600">
+            }} className="mb-4 text-gray-600 text-lg">
             Our mission is simple: To provide equal opportunities for individuals to showcase 
             their unique abilities, helping them stand out in competitive industries. 
             We’re passionate about identifying raw talent, empowering the next generation 
@@ -412,7 +412,7 @@ const About: React.FC = () => {
         </div>
       </div>
     </section>
-    <section className="mt-8 mb-16 max-w-[80%] mx-auto">
+    <section className="mt-8 mb-16 max-w-[80%] font-newtimesRoman mx-auto">
 
       <div className="container mx-auto text-center mb-12">
       <motion.h2
@@ -423,7 +423,7 @@ const About: React.FC = () => {
         stiffness: 100,
         damping: 10,
         delay: 0.4,
-      }} className="text-3xl font-bold text-yellow-500">Team
+      }} className="text-3xl font-bold text-gray-800">Team
       </motion.h2>
 
       <motion.p
@@ -434,7 +434,7 @@ const About: React.FC = () => {
         stiffness: 100,
         damping: 10,
         delay: 0.3,
-      }} className="text-gray-600">Necessitatibus eius consequatur
+      }} className="text-gray-600 text-lg">Necessitatibus eius consequatur
       </motion.p>
 
       </div>

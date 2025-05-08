@@ -3,9 +3,9 @@ import {motion} from "framer-motion";
 
 const Registration: React.FC = () => {
   return (
-    <div className='h-[70%] max-w-[90%] mx-auto'>
-    <section className="w-full relative flex items-center flex-col lg:flex-row">
-        <div>
+    <div className='h-[70%] max-w-[93%] mx-auto'>
+    <section className="w-full p-4 bg-gray-800 relative flex items-center flex-col md:flex-row">
+    <div className='lg:w-[80%]'>
     <motion.img
         initial={{ opacity:0, y: -100 }}
         whileInView={{ opacity:1, y: 0 }}
@@ -15,7 +15,7 @@ const Registration: React.FC = () => {
           damping: 10,
           delay: 0.4,
         }} 
-        className="lg:w-2/3" src="https://media.istockphoto.com/id/1472359066/photo/survey-form-check-marks-on-checklist-filling-online-form-and-answering-questions-concept.jpg?s=1024x1024&w=is&k=20&c=Sffn9LQq2qK4tQm0APuanrUb0alk7DZy_KNDlduruQg=" alt="port image" 
+        className="md:w-2/3" src="https://images.unsplash.com/photo-1556742504-16b083241fab?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="port image" 
         />
     </div>
     <motion.div
@@ -27,7 +27,7 @@ const Registration: React.FC = () => {
           damping: 10,
           delay: 0.4,
         }}
-      className="lg:absolute lg:left-[30%] md:left-[30%] lg:w-[65%] lg:p-6 sm:p-6 p-4 flex flex-col justify-center bg-gray-800 font-newtimesRoman">
+      className="md:absolute md:left-[35%] lg:w-[65%] lg:p-6 sm:p-6 md:p-4 flex flex-col justify-center bg-gray-800 font-newtimesRoman">
       <motion.h2
         initial={{ opacity:0, y: -100 }}
         whileInView={{ opacity:1, y: 0 }}
@@ -54,7 +54,7 @@ const Registration: React.FC = () => {
       <div>
         <a
         href="/registration"
-        className="bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black  py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg transition-all">
+        className="bg-yellow-500 hover:bg-yellow-400 hover:text-yellow-100 text-black  py-2 px-3 lg:py-2 lg:px-5 rounded-sm text-lg  transition-all duration-500 ease-in-out">
           Register Now
           </a>
       </div>

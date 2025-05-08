@@ -115,7 +115,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     <main className="mt-16">
     <div
       className="relative bg-cover bg-center text-white py-36"
-      style={{ backgroundImage: "url(https://plus.unsplash.com/premium_photo-1664302091622-32248181a4b6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)" }}
+      style={{ backgroundImage: "url(https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)" }}
     >
     <div className="absolute inset-0 bg-black opacity-30"></div>
     <div className="relative z-10 flex flex-col justify-center items-center h-[80%] text-center">
@@ -138,7 +138,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
       stiffness: 100,
       damping: 10,
       delay: 0.4,
-    }} className='mt-2 max-w-[70%]'>
+    }} className='mt-2 max-w-[70%] text-xl'>
       At Level Up Talent Detection, we are dedicated to discovering and empowering exceptional talent across industries. 
     </motion.p>
 
@@ -150,7 +150,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
       stiffness: 100,
       damping: 10,
       delay: 0.3,
-    }} className="text-sm mt-3">
+    }} className="text-lg mt-3">
       Home / <span className="text-yellow-400">Registration</span>
     </motion.p>
       </div>
