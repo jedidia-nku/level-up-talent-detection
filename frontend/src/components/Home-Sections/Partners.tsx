@@ -4,7 +4,7 @@ import {motion} from "framer-motion";
 
 const Partners: React.FC = () => {
 	return (
-	<section className="h-[80vh] md:h-[40vh] lg:h-[80vh] flex flex-col justify-center">
+	<section className="flex flex-col justify-center">
 	<motion.h2
       initial={{ opacity:0, y: -100 }}
       whileInView={{ opacity:1, y: 0 }}

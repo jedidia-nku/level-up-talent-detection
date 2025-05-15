@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
 
 
   return (
-    <div className="relative w-full h-screen lg:h-[550px]">
+    <div className="relative w-full h-screen lg:h-[500px]">
       {/* Fixed Header */}
 
       {/* Hero Content (Fixed on top of swiper) */}

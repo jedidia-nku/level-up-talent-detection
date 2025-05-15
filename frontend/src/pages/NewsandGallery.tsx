@@ -14,7 +14,6 @@ interface NewsItem {
 }
 
 const NewsandGallery: React.FC = () => {
-
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
       const [images, setImages] = useState<{ public_id: string; url: string }[]>([]);
       const [newsList, setNewsList] = useState<NewsItem[]>([]);
@@ -46,7 +45,7 @@ const NewsandGallery: React.FC = () => {
           setSelectedNews(newsList[0]);
         }
       }, [newsList, selectedNews]);
-      
+
       const fetchImages = async () => {
         try {
           const res = await axios.get("https://level-up-talent-detection.onrender.com/api/upload");

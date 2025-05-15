@@ -4,7 +4,7 @@ import {motion} from "framer-motion";
 const Registration: React.FC = () => {
   return (
     <div className='h-[70%] max-w-[93%] mx-auto'>
-    <section className="w-full p-4 bg-gray-800 relative flex items-center flex-col md:flex-row">
+    <section className="w-full py-4 relative flex items-center flex-col md:flex-row">
     <div className='lg:w-[80%]'>
     <motion.img
         initial={{ opacity:0, y: -100 }}
@@ -15,7 +15,7 @@ const Registration: React.FC = () => {
           damping: 10,
           delay: 0.4,
         }} 
-        className="md:w-2/3" src="https://images.unsplash.com/photo-1556742504-16b083241fab?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="port image" 
+        className="md:w-2/3 h-64" src="https://images.unsplash.com/photo-1556742504-16b083241fab?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="port image" 
         />
     </div>
     <motion.div
