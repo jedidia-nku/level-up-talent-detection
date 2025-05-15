@@ -3,7 +3,7 @@ import {motion} from "framer-motion";
 
 const Registration: React.FC = () => {
   return (
-    <div className='h-[70%] max-w-[93%] mx-auto'>
+    <div className='h-[80%] md:h-[70%] max-w-[93%] mx-auto'>
     <section className="w-full py-4 relative flex items-center flex-col md:flex-row">
     <div className='lg:w-[80%]'>
     <motion.img
@@ -27,7 +27,7 @@ const Registration: React.FC = () => {
           damping: 10,
           delay: 0.4,
         }}
-      className="md:absolute md:left-[35%] lg:w-[65%] lg:p-6 sm:p-6 md:p-4 flex flex-col justify-center bg-gray-800 font-newtimesRoman">
+      className="p-6 md:absolute md:left-[35%] lg:w-[65%] lg:p-6 md:p-4 flex flex-col justify-center bg-gray-800 font-newtimesRoman">
       <motion.h2
         initial={{ opacity:0, y: -100 }}
         whileInView={{ opacity:1, y: 0 }}
