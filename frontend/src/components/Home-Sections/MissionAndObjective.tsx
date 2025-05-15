@@ -9,7 +9,7 @@ const MissionAndObjective: React.FC = () => {
       >
         {/* Black overlay with 50% opacity */}
         <div className="absolute inset-0 bg-black/60"></div>
-    <div className="relative z-2 max-w-[95%] mx-auto px-4 py-12 sm:px-6 lg:px-8 font-newtimesRoman">
+    <div className="relative z-2 max-w-[95%] mx-auto px-4 py-4 sm:px-6 lg:px-8 font-newtimesRoman">
             <motion.h2
         initial={{ opacity:0, y: -100 }}
         whileInView={{ opacity:1, y: 0 }}
